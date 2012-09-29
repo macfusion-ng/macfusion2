@@ -3,7 +3,7 @@ Macfusion
 
 [Macfusion][] brings servers from across the internet directly to your Mac's desktop!
 
-![icon](https://github.com/mgorbach/macfusion2/blob/gh-pages/images/macfusionIcon.png)
+![icon](https://github.com/downloads/ElDeveloper/macfusion2/macfusionIcon.png)
 
 - Mount files and documents as a "Volume" in the Mac OS X Finder
 - Work with your files using your favorite Mac OS X applications directly. No manual upload or download needed!
