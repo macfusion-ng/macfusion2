@@ -39,7 +39,13 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 }
 
 - (NSString *)executablePath {
-	return [[NSBundle bundleForClass:[self class]] pathForResource:@"sshfs-static" ofType:nil inDirectory:nil];
+    NSMutableString *binaryName=[[NSMutableString alloc] initWithString:@"sshfs-static"];
+    
+    if ( NSAppKitVersionNumber >= NSAppKitVersionNumber10_7 ) {
+        [binaryName appendString:@"-lions"];
+    }
+    
+	return [[NSBundle bundleForClass:[self class]] pathForResource:binaryName ofType:nil inDirectory:nil];
 }
 
 - (NSArray *)secretsClientsList {
