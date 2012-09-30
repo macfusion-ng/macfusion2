@@ -37,6 +37,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		50F1E98E16179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
+		50F1E98F16179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
+		50F1E99016179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
+		50F1E99116179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
+		50F1E99216179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
+		50F1E99316179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
 		D40235AE0D7E0176000B9B64 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40235AD0D7E0176000B9B64 /* Carbon.framework */; };
 		D402372E0D7E029E000B9B64 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40235AD0D7E0176000B9B64 /* Carbon.framework */; };
 		D403632F0E0780BF0048BB63 /* MFEditingController.h in Headers */ = {isa = PBXBuildFile; fileRef = D403632D0E0780BF0048BB63 /* MFEditingController.h */; };
@@ -353,6 +359,7 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* macfusionAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = macfusionAgent.m; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		50F1E98D16179E2300F94F9D /* sshfs-static-lions */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "sshfs-static-lions"; sourceTree = "<group>"; };
 		D40235AD0D7E0176000B9B64 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		D403632D0E0780BF0048BB63 /* MFEditingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFEditingController.h; sourceTree = "<group>"; };
 		D403632E0E0780BF0048BB63 /* MFEditingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFEditingController.m; sourceTree = "<group>"; };
@@ -841,6 +848,7 @@
 				D439D6D50D0A0FDE0025574A /* sshfsConfiguration.xib */,
 				D4B14C0F0CE03F4C003195A3 /* sshfs-Info.plist */,
 				D4B14BAC0CE03C84003195A3 /* sshfs-static */,
+				50F1E98D16179E2300F94F9D /* sshfs-static-lions */,
 				D41316310D7F740400F55B9B /* sshfsAdvanced.xib */,
 			);
 			name = Resources;
@@ -1274,6 +1282,7 @@
 				D41E25C30D89B4BA00F46F50 /* MacFusion_Menu_Dark.png in Resources */,
 				D45F0D950D8B3396008CC7E3 /* macfusionAgent-Info.plist in Resources */,
 				D47F67BD0D984A8700E91D45 /* logViewer.xib in Resources */,
+				50F1E98E16179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1286,6 +1295,7 @@
 				D418688E0D729F0B004975AF /* macfusionIcon.icns in Resources */,
 				D48DB9E60D70DA28008A62BB /* MainMenu.xib in Resources */,
 				D41867E70D729A31004975AF /* QuickMount.xib in Resources */,
+				50F1E99216179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1299,6 +1309,7 @@
 				D4656C8E0D6FD6DC00DE2208 /* sshfs.png in Resources */,
 				D41316320D7F740400F55B9B /* sshfsAdvanced.xib in Resources */,
 				D41E17DF0D86040B00F46F50 /* new_sshfs_askpass in Resources */,
+				50F1E99016179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1312,6 +1323,7 @@
 				D4C9139F0E04EC5F0071C4AF /* ActionGear.png in Resources */,
 				D4C917050E0626BF0071C4AF /* Plus.tiff in Resources */,
 				D4EBC34112A9754E0052951E /* macfusion_dsa_pub.pem in Resources */,
+				50F1E99316179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1324,6 +1336,7 @@
 				D4E6D82F0D9373E40022763F /* ftpfs.png in Resources */,
 				D4E6D8430D9375930022763F /* curlftpfs_static_mg in Resources */,
 				D4E6D8480D937DB00022763F /* ftpfsConfiguration.xib in Resources */,
+				50F1E98F16179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1332,6 +1345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4EA63570D8B3118006D8885 /* macfusionIcon.icns in Resources */,
+				50F1E99116179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1686,7 +1700,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = MFCore;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 				VALID_ARCHS = x86_64;
 				ZERO_LINK = NO;
 			};
@@ -1730,7 +1744,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = MFCore;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 				VALID_ARCHS = x86_64;
 				ZERO_LINK = NO;
 			};
@@ -1996,7 +2010,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = MFCore;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 				VALID_ARCHS = x86_64;
 				ZERO_LINK = NO;
 			};
@@ -2580,7 +2594,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = MFCore;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 				VALID_ARCHS = x86_64;
 				ZERO_LINK = NO;
 			};

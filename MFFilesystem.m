@@ -61,11 +61,11 @@
 }
 
 - (NSString *)name {
-	return [self valueForParameterNamed: kMFFSNameParameter ];
+	return [self valueForParameterNamed:kMFFSNameParameter];
 }
 
 - (NSString *)pluginID {
-	return [self valueForParameterNamed: kMFFSTypeParameter ];
+	return [self valueForParameterNamed:kMFFSTypeParameter];
 }
 
 # pragma mark Setters
@@ -98,11 +98,11 @@
 		return delegateValue;
 	}
 	
-	if ([paramName isEqualToString: kMFFSVolumeNameParameter]) {
-		return [parameters objectForKey: kMFFSNameParameter] ? [parameters objectForKey: kMFFSNameParameter] : @"Unnamed";
+	if ([paramName isEqualToString:kMFFSVolumeNameParameter]) {
+		return [parameters objectForKey:kMFFSNameParameter] ? [parameters objectForKey:kMFFSNameParameter] : @"Unnamed";
 	}
 	
-	if ([paramName isEqualToString: kMFFSNameParameter]) {
+	if ([paramName isEqualToString:kMFFSNameParameter]) {
 		return @"Unnamed";
 	}
 	if ([paramName isEqualToString: kMFFSFilePathParameter]) {
@@ -162,16 +162,16 @@
 }
 
 - (NSString *)iconPath {
-	NSString* iconPath = [self valueForParameterNamed: kMFFSVolumeIconPathParameter ];
+	NSString* iconPath = [self valueForParameterNamed:kMFFSVolumeIconPathParameter ];
 	return iconPath;
 }
 
 - (NSString *)imagePath {
-	return [self valueForParameterNamed: kMFFSVolumeImagePathParameter ];
+	return [self valueForParameterNamed:kMFFSVolumeImagePathParameter ];
 }
 
 - (NSString *)descriptionString {
-	if ([parameters objectForKey: kMFFSDescriptionParameter ]) {
+	if ([parameters objectForKey:kMFFSDescriptionParameter ]) {
 		return [parameters objectForKey: kMFFSDescriptionParameter ];
 	}
 
@@ -180,7 +180,7 @@
 }
 
 - (BOOL)isPersistent {
-	return [[self valueForParameterNamed: kMFFSPersistentParameter] boolValue];
+	return [[self valueForParameterNamed:kMFFSPersistentParameter] boolValue];
 }
 
 - (void)setPersistent:(BOOL)b {

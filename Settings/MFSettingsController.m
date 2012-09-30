@@ -313,7 +313,7 @@
 }
 
 - (void)deleteFilesystem:(MFClientFS *)fs {
-	[self deleteFilesystems: [NSArray arrayWithObject: fs]];
+	[self deleteFilesystems: [NSArray arrayWithObject:fs]];
 }
 	
 
@@ -368,10 +368,12 @@
 - (void)deleteConfirmationAlertDidEnd:(NSAlert*)alert returnCode:(NSInteger)code contextInfo:(void *)context {
 	NSArray *filesystemsToDelete = (NSArray *)context;
 	if (code == NSAlertSecondButtonReturn) {
+        MFLogS(self, @"Deletions canceled");
 		
-	} else if (code == NSAlertFirstButtonReturn) {
+	}
+    else if (code == NSAlertFirstButtonReturn) {
 		for(MFClientFS *fs in filesystemsToDelete) {
-			[client deleteFilesystem: fs];	
+			[client deleteFilesystem:fs];
 		}
 	}
 }
