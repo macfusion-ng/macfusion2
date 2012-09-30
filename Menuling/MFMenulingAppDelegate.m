@@ -177,8 +177,7 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 - (void)fsSelected:(id)sender {
 	MFClientFS *fs = [sender representedObject];
 	if ([fs isMounted]) {
-		[[NSWorkspace sharedWorkspace]
-		 selectFile:nil inFileViewerRootedAtPath:fs.mountPath];
+        [fs unmount];
 	} else if ([fs isUnmounted] || [fs isFailedToMount]) {
 		[fs setClientFSDelegate:self];
 		[fs mount];
