@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.5.0</string>
+	<string>10.6.0</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.4</string>
+	<string>2.0.5-dev</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -48,7 +48,7 @@
 	<key>SUCheckForUpdates</key>
 	<true/>
 	<key>CFBundleVersion</key>
-	<string>2.0.4</string>
+	<string>2.0.5-dev</string>
 	<key>NSMainNibFile</key>
 	<string>main</string>
 	<key>NSPrincipalClass</key>

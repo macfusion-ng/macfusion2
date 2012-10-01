@@ -137,6 +137,8 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 		for(MFClientFS *fs in persistentFilesystems)
 		{
 			NSMenuItem *menuItem = [NSMenuItem new];
+            [menuItem setOffStateImage:[NSImage imageNamed:@"off.png"]];
+            [menuItem setOnStateImage:[NSImage imageNamed:@"on.png"]];
 			[menuItem setTitle:fs.name];
 			[menuItem setRepresentedObject:fs];
 			[menuItem setAction: @selector(fsSelected:)];
