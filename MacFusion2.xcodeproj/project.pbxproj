@@ -37,6 +37,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		50BC2B61161837D1007E13BD /* off.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BC2B60161837D1007E13BD /* off.png */; };
+		50BC2B6416183A1B007E13BD /* on.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BC2B6316183A1B007E13BD /* on.png */; };
 		50F1E98E16179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
 		50F1E98F16179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
 		50F1E99016179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
@@ -359,6 +361,8 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* macfusionAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = macfusionAgent.m; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		50BC2B60161837D1007E13BD /* off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = off.png; sourceTree = "<group>"; };
+		50BC2B6316183A1B007E13BD /* on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = on.png; sourceTree = "<group>"; };
 		50F1E98D16179E2300F94F9D /* sshfs-static-lions */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "sshfs-static-lions"; sourceTree = "<group>"; };
 		D40235AD0D7E0176000B9B64 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		D403632D0E0780BF0048BB63 /* MFEditingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFEditingController.h; sourceTree = "<group>"; };
@@ -670,6 +674,8 @@
 		D41867E50D729A0F004975AF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				50BC2B60161837D1007E13BD /* off.png */,
+				50BC2B6316183A1B007E13BD /* on.png */,
 				D41E25C00D89B4B900F46F50 /* MacFusion_Menu_Light.png */,
 				D41E25C10D89B4B900F46F50 /* MacFusion_Menu_Dark.png */,
 				D48DB9A90D70D910008A62BB /* MainMenu.xib */,
@@ -1296,6 +1302,8 @@
 				D48DB9E60D70DA28008A62BB /* MainMenu.xib in Resources */,
 				D41867E70D729A31004975AF /* QuickMount.xib in Resources */,
 				50F1E99216179E2300F94F9D /* sshfs-static-lions in Resources */,
+				50BC2B61161837D1007E13BD /* off.png in Resources */,
+				50BC2B6416183A1B007E13BD /* on.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1601,7 +1609,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
@@ -1714,7 +1722,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 				VALID_ARCHS = x86_64;
 			};
 			name = "Release-Signed";
@@ -1980,7 +1988,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 				VALID_ARCHS = x86_64;
 			};
 			name = "Debug-Signed";
@@ -2564,7 +2572,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
