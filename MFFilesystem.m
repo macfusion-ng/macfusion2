@@ -49,7 +49,7 @@
 }
 
 - (NSString *)mountPath {
-	return [self valueForParameterNamed:kMFFSMountPathParameter];
+	return [[[self valueForParameterNamed:kMFFSMountPathParameter] stringByExpandingTildeInPath] stringByStandardizingPath];
 }
 
 - (NSString *)uuid {

@@ -48,7 +48,7 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 	NSMutableArray *arguments = [NSMutableArray array];
 	[arguments addObject:[NSString stringWithFormat:@"%@:%@/%@", [parameters objectForKey:kNetFSHostParameter], [parameters objectForKey:kNetFSPortParameter], [parameters objectForKey:kNetFSDirectoryParameter]]];
 	
-	[arguments addObject:[parameters objectForKey:kMFFSMountPathParameter]];
+	[arguments addObject:[[[parameters objectForKey:kMFFSMountPathParameter] stringByExpandingTildeInPath] stringByStandardizingPath]];
 	
 	if ([parameters objectForKey:kNetFSUserParameter]) {
 		[arguments addObject:[NSString stringWithFormat:@"-ouser=%@", [parameters objectForKey:kNetFSUserParameter]]];

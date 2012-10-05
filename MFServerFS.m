@@ -306,7 +306,7 @@
 # pragma mark Mounting mechanics
 - (BOOL)setupMountPoint {
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSString *mountPath = [self mountPath];
+	NSString *mountPath = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
 	BOOL pathExists, isDir, returnValue;
 	NSString *errorDescription;
 	
@@ -349,7 +349,7 @@
 
 - (void)removeMountPoint {
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSString *mountPath = [self mountPath];
+	NSString *mountPath = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
 	BOOL pathExists, isDir;
 	
 	removexattr([mountPath cStringUsingEncoding:NSUTF8StringEncoding],[@"org.mgorbach.macfusion.xattr.uuid" cStringUsingEncoding:NSUTF8StringEncoding],0);
@@ -383,7 +383,7 @@
 
 - (void)unmount {
 	MFLogS(self, @"Unmounting");
-	NSString* path = [[self mountPath] stringByStandardizingPath];
+	NSString* path = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
 	NSString *taskPath = @"/sbin/umount";
 	NSTask* t = [[NSTask alloc] init];
 	[t setLaunchPath:taskPath];
