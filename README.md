@@ -29,7 +29,7 @@ Current fixes
 
 - Include a way to call a newer version of sshfs to work in OS X Lion and greater.
 - Application no longer crashes when deleting a filesystem.
-- Ability to expand the mount path i. e. ~/filesystems -> /Users/yoshiki/filesystem 
+- Ability to expand the mount path, for example: `~/filesystem` to `/Users/yoshiki/filesystem`. 
 - Modified the menu application to toggle between mount and un-mount filesystem.
 
 [Macfusion]:http://macfusionapp.org/releases/Macfusion_2.0.4.zip
