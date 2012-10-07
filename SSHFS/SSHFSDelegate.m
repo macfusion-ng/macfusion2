@@ -40,8 +40,11 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 
 - (NSString *)executablePath {
     NSMutableString *binaryName=[[NSMutableString alloc] initWithString:@"sshfs-static"];
-    
-    if ( NSAppKitVersionNumber >= NSAppKitVersionNumber10_7 ) {
+
+	// The support for the NSAppKitVersionNumber is not consistent in 10.6
+	// Snow Leopard, so you cannot rely on it, therefore use the double value
+	// that identifies 10.7 Lion as NSAppKitVersionNumber10_7
+    if ( NSAppKitVersionNumber >= 1138 ) {
         [binaryName appendString:@"-lions"];
     }
     
@@ -63,7 +66,8 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 	
 	[arguments addObject:[[[parameters objectForKey:kMFFSMountPathParameter] stringByExpandingTildeInPath] stringByStandardizingPath]];
 	[arguments addObject:[NSString stringWithFormat:@"-p%@", [parameters objectForKey:kNetFSPortParameter]]];
-	
+
+    [arguments addObject:@"-odefer_permissions"];
     [arguments addObject:@"-ocache=no"];
     [arguments addObject:@"-onolocalcaches"];
 	[arguments addObject:@"-oCheckHostIP=no"];
