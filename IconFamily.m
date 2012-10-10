@@ -1287,6 +1287,9 @@ enum {
     return hRawData;
 }
 
+// Method taken from IconFamily.m @ https://github.com/alexzielenski/IconFamily
+// On commit 4aefbd943052a08850f8a67bd9be8b582b9bb406
+// Authored by Alex Zielenski <alex@zielenski.net>
 + (Handle) get8BitDataFromBitmapImageRep:(NSBitmapImageRep*)bitmapImageRep requiredPixelSize:(int)requiredPixelSize
 {
     Handle hRawData;
@@ -1295,7 +1298,7 @@ enum {
     unsigned char* pSrc;
     unsigned char* pDest;
     int x, y;
-	
+
     // Get information about the bitmapImageRep.
     long pixelsWide      = [bitmapImageRep pixelsWide];
     long pixelsHigh      = [bitmapImageRep pixelsHigh];
@@ -1305,11 +1308,11 @@ enum {
     BOOL isPlanar       = [bitmapImageRep isPlanar];
     long bytesPerRow     = [bitmapImageRep bytesPerRow];
     unsigned char* bitmapData = [bitmapImageRep bitmapData];
-    
+
     // Make sure bitmap has the required dimensions.
     if (pixelsWide != requiredPixelSize || pixelsHigh != requiredPixelSize)
         return NULL;
-	
+
     // So far, this code only handles non-planar 32-bit RGBA and 24-bit RGB source bitmaps.
     // This could be made more flexible with some additional programming...
     if (isPlanar)
@@ -1319,34 +1322,29 @@ enum {
 	}
     if (bitsPerSample != 8)
 	{
-		NSLog(@"get8BitDataFromBitmapImageRep:requiredPixelSize: returning NULL due to bitsPerSample == %lu", bitsPerSample);
+		NSLog(@"get8BitDataFromBitmapImageRep:requiredPixelSize: returning NULL due to bitsPerSample == %ld", bitsPerSample);
 		return NULL;
 	}
-	
+
 	if (((samplesPerPixel == 3) && (bitsPerPixel == 24)) || ((samplesPerPixel == 4) && (bitsPerPixel == 32)))
 	{
-		CGDirectPaletteRef cgPal;
-		CGDeviceColor cgCol;
-
 		rawDataSize = pixelsWide * pixelsHigh;
 		hRawData = NewHandle( rawDataSize );
 		if (hRawData == NULL)
 			return NULL;
 		pRawData = (unsigned char*) *hRawData;
-		
-		cgPal = CGPaletteCreateDefaultColorPalette();
-		
+
 		pDest = pRawData;
 		if (bitsPerPixel == 32) {
 			for (y = 0; y < pixelsHigh; y++) {
 				pSrc = bitmapData + y * bytesPerRow;
 				for (x = 0; x < pixelsWide; x++) {
-					cgCol.red = ((float)*(pSrc)) / 255;
-					cgCol.green = ((float)*(pSrc+1)) / 255;
-					cgCol.blue = ((float)*(pSrc+2)) / 255;
-	
-					*pDest++ = CGPaletteGetIndexForColor(cgPal, cgCol);
-	
+					unsigned char r = *(pSrc + 1);
+					unsigned char g = *(pSrc + 2);
+					unsigned char b = *(pSrc + 3);
+
+					*pDest++ = (0 << 24) | (r << 16) | (g << 8) | b;
+
 					pSrc+=4;
 				}
 			}
@@ -1354,25 +1352,24 @@ enum {
 			for (y = 0; y < pixelsHigh; y++) {
 				pSrc = bitmapData + y * bytesPerRow;
 				for (x = 0; x < pixelsWide; x++) {
-					cgCol.red = ((float)*(pSrc)) / 255;
-					cgCol.green = ((float)*(pSrc+1)) / 255;
-					cgCol.blue = ((float)*(pSrc+2)) / 255;
-	
-					*pDest++ = CGPaletteGetIndexForColor(cgPal, cgCol);
-	
+					unsigned char r = *(pSrc);
+					unsigned char g = *(pSrc + 1);
+					unsigned char b = *(pSrc + 2);
+
+					*pDest++ = (0 << 24) | (r << 16) | (g << 8) | b;
+
 					pSrc+=3;
 				}
 			}
 		}
-		
-		CGPaletteRelease(cgPal);
+
 	}
 	else
 	{
-		NSLog(@"get8BitDataFromBitmapImageRep:requiredPixelSize: returning NULL due to samplesPerPixel == %lu, bitsPerPixel == %lu", samplesPerPixel, bitsPerPixel);
+		NSLog(@"get8BitDataFromBitmapImageRep:requiredPixelSize: returning NULL due to samplesPerPixel == %ld, bitsPerPixel == %ld", samplesPerPixel, bitsPerPixel);
 		return NULL;
 	}
-	
+
     return hRawData;
 }
 
