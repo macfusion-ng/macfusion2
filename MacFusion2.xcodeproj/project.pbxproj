@@ -39,12 +39,7 @@
 /* Begin PBXBuildFile section */
 		50BC2B61161837D1007E13BD /* off.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BC2B60161837D1007E13BD /* off.png */; };
 		50BC2B6416183A1B007E13BD /* on.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BC2B6316183A1B007E13BD /* on.png */; };
-		50F1E98E16179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
-		50F1E98F16179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
 		50F1E99016179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
-		50F1E99116179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
-		50F1E99216179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
-		50F1E99316179E2300F94F9D /* sshfs-static-lions in Resources */ = {isa = PBXBuildFile; fileRef = 50F1E98D16179E2300F94F9D /* sshfs-static-lions */; };
 		D40235AE0D7E0176000B9B64 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40235AD0D7E0176000B9B64 /* Carbon.framework */; };
 		D402372E0D7E029E000B9B64 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40235AD0D7E0176000B9B64 /* Carbon.framework */; };
 		D403632F0E0780BF0048BB63 /* MFEditingController.h in Headers */ = {isa = PBXBuildFile; fileRef = D403632D0E0780BF0048BB63 /* MFEditingController.h */; };
@@ -1288,7 +1283,6 @@
 				D41E25C30D89B4BA00F46F50 /* MacFusion_Menu_Dark.png in Resources */,
 				D45F0D950D8B3396008CC7E3 /* macfusionAgent-Info.plist in Resources */,
 				D47F67BD0D984A8700E91D45 /* logViewer.xib in Resources */,
-				50F1E98E16179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1301,7 +1295,6 @@
 				D418688E0D729F0B004975AF /* macfusionIcon.icns in Resources */,
 				D48DB9E60D70DA28008A62BB /* MainMenu.xib in Resources */,
 				D41867E70D729A31004975AF /* QuickMount.xib in Resources */,
-				50F1E99216179E2300F94F9D /* sshfs-static-lions in Resources */,
 				50BC2B61161837D1007E13BD /* off.png in Resources */,
 				50BC2B6416183A1B007E13BD /* on.png in Resources */,
 			);
@@ -1331,7 +1324,6 @@
 				D4C9139F0E04EC5F0071C4AF /* ActionGear.png in Resources */,
 				D4C917050E0626BF0071C4AF /* Plus.tiff in Resources */,
 				D4EBC34112A9754E0052951E /* macfusion_dsa_pub.pem in Resources */,
-				50F1E99316179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1344,7 +1336,6 @@
 				D4E6D82F0D9373E40022763F /* ftpfs.png in Resources */,
 				D4E6D8430D9375930022763F /* curlftpfs_static_mg in Resources */,
 				D4E6D8480D937DB00022763F /* ftpfsConfiguration.xib in Resources */,
-				50F1E98F16179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1353,7 +1344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4EA63570D8B3118006D8885 /* macfusionIcon.icns in Resources */,
-				50F1E99116179E2300F94F9D /* sshfs-static-lions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1606,10 +1596,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
@@ -1618,7 +1609,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GC = required;
@@ -1642,6 +1634,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_GC = required;
@@ -1687,6 +1681,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1708,7 +1703,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = MFCore;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = x86_64;
 				ZERO_LINK = NO;
 			};
@@ -1718,11 +1713,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = x86_64;
 			};
 			name = "Release-Signed";
@@ -1731,6 +1727,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1752,7 +1749,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = MFCore;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = x86_64;
 				ZERO_LINK = NO;
 			};
@@ -1838,7 +1835,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GC = required;
@@ -1862,6 +1860,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1886,6 +1885,7 @@
 		D45B70F10E1B3DFF0036043E /* Release-Signed */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GC = required;
@@ -1907,6 +1907,7 @@
 		D45B70F20E1B3DFF0036043E /* Release-Signed */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1932,6 +1933,7 @@
 		D45B70F30E1B3DFF0036043E /* Release-Signed */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1953,6 +1955,8 @@
 					AppKit,
 				);
 				PRODUCT_NAME = Macfusion;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -1984,11 +1988,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = x86_64;
 			};
 			name = "Debug-Signed";
@@ -1997,6 +2002,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2018,7 +2024,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = MFCore;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = x86_64;
 				ZERO_LINK = NO;
 			};
@@ -2104,7 +2110,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GC = required;
@@ -2128,6 +2135,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2152,6 +2160,7 @@
 		D45B70FD0E1B3E050036043E /* Debug-Signed */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GC = required;
@@ -2173,6 +2182,7 @@
 		D45B70FE0E1B3E050036043E /* Debug-Signed */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2198,6 +2208,7 @@
 		D45B70FF0E1B3E050036043E /* Debug-Signed */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2219,6 +2230,8 @@
 					AppKit,
 				);
 				PRODUCT_NAME = Macfusion;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -2249,6 +2262,7 @@
 		D48DB9820D70D7A4008A62BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2274,6 +2288,7 @@
 		D48DB9830D70D7A4008A62BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2326,6 +2341,7 @@
 		D4B14D6F0CE19545003195A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GC = required;
@@ -2347,6 +2363,7 @@
 		D4DB42070D3E863200C99914 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2368,6 +2385,8 @@
 					AppKit,
 				);
 				PRODUCT_NAME = Macfusion;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -2376,6 +2395,7 @@
 		D4DB42080D3E863200C99914 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2398,6 +2418,8 @@
 					AppKit,
 				);
 				PRODUCT_NAME = Macfusion;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -2507,6 +2529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2532,6 +2555,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2568,11 +2592,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -2581,6 +2606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2602,7 +2628,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = MFCore;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = x86_64;
 				ZERO_LINK = NO;
 			};
@@ -2637,6 +2663,7 @@
 		D4FC0DCB0CF23DE30029B133 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GC = required;
