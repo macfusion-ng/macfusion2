@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 	[[MFLogging sharedLogging] setPrintToStandardOut:NO];
 	NSString *token = [[[NSProcessInfo processInfo] environment] objectForKey:@"SSHFS_TOKEN"];
 	// MFLogS(self, @"SSH ASKPASS running token %@", token);
-	NSString *password;
+	NSString *password=nil;
 	
 	if (!token) {
 		MFLogS(self, @"Could not find token");
@@ -47,6 +47,11 @@ int main(int argc, char *argv[]) {
 		
 		if (!password) {
 			password = mfsecQueryForFSNetworkPassword(fs);
+
+			// last resource is asking for the password
+			if (!password) {
+				password = mfsecQueryForFSNetworkPassword(fs);
+			}
 		}
 		
 		if ([password length] > 0) {
