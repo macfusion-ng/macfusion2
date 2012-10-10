@@ -383,11 +383,16 @@
 
 - (void)unmount {
 	MFLogS(self, @"Unmounting");
-	NSString* path = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
-	NSString *taskPath = @"/sbin/umount";
+	NSString *path = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
+	NSString *taskPath = @"/usr/sbin/diskutil";
+	NSMutableArray *taskArguments = [NSMutableArray array];
 	NSTask* t = [[NSTask alloc] init];
+
+	[taskArguments addObject:@"unmount"];
+	[taskArguments addObject:path];
+
 	[t setLaunchPath:taskPath];
-	[t setArguments:[NSArray arrayWithObject:path]];
+	[t setArguments:taskArguments];
 	[t launch];
 	
 	/*
