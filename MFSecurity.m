@@ -396,8 +396,6 @@ SInt32 showDialogForPasswordQuery(MFFilesystem* fs, BOOL* savePassword, NSString
 	CFStringRef passwordRef = CFUserNotificationGetResponseValue(passwordDialog,kCFUserNotificationTextFieldValuesKey,
 																 0);
 	*password = (NSString *)passwordRef;
-	CFRelease(passwordRef);
-	
 	return 0;
 }
 
