@@ -648,8 +648,8 @@
 		D412AFC00D596E740091C12B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				D412AFC20D596E890091C12B /* MGUtilities.m */,
 				D412AFC50D596F4B0091C12B /* MGUtilities.h */,
+				D412AFC20D596E890091C12B /* MGUtilities.m */,
 				D4E983460D7223D70058AF73 /* MGNSImage.h */,
 				D4E983440D7223CE0058AF73 /* MGNSImage.m */,
 			);
@@ -991,8 +991,8 @@
 			children = (
 				D4E6CEF80D9223770022763F /* IconFamily.h */,
 				D4E6CEF90D9223770022763F /* IconFamily.m */,
-				D4E6CEFA0D9223770022763F /* NSString+CarbonFSRefCreation.m */,
 				D4E6CEFB0D9223770022763F /* NSString+CarbonFSRefCreation.h */,
+				D4E6CEFA0D9223770022763F /* NSString+CarbonFSRefCreation.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";

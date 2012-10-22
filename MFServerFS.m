@@ -40,7 +40,9 @@
 - (NSError *)genericError;
 - (void)setError:(NSError*)error;
 - (NSTimer *)newTimeoutTimer;
+
 - (void)addFileSystemToFinderSidebar;
+- (void)removeFileSystemFromFinderSidebar;
 @end
 
 @implementation MFServerFS
@@ -379,6 +381,7 @@
 		[_timer invalidate];
 		_timer = [self newTimeoutTimer];
 		[_task launch];
+		[self addFileSystemToFinderSidebar];
 		MFLogS(self, @"Task launched OK");
 	} else {
 		MFLogS(self, @"Mount point could not be created");
@@ -393,14 +396,15 @@
 	NSString *path = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
 	NSString *taskPath = @"/usr/sbin/diskutil";
 	NSMutableArray *taskArguments = [NSMutableArray array];
-	NSTask* t = [[NSTask alloc] init];
+	NSTask* unmountTask = [[NSTask alloc] init];
 
 	[taskArguments addObject:@"unmount"];
 	[taskArguments addObject:path];
 
-	[t setLaunchPath:taskPath];
-	[t setArguments:taskArguments];
-	[t launch];
+	[unmountTask setLaunchPath:taskPath];
+	[unmountTask setArguments:taskArguments];
+	[unmountTask launch];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTaskDidTerminate:) name:NSTaskDidTerminateNotification object:unmountTask];
 	/*
 	[t waitUntilExit];
 	if ([t terminationStatus] != 0)
@@ -529,7 +533,11 @@
 	[_timer invalidate];
 }
 
-- (void)handleTaskDidTerminate:(NSNotification *)note {
+- (void)handleTaskDidTerminate:(NSTask *)task {
+	// If any task terminates i. e. mount or unmount you have to remove the
+	// sidebar item for the filesystem as it is created on demand
+	[self removeFileSystemFromFinderSidebar];
+	
 	if (self.status == kMFStatusFSMounted) {
 		// We are terminating after a mount has been successful
 		// This may not quite be normal (may be for example a bad net connection)
