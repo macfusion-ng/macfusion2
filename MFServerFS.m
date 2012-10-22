@@ -20,8 +20,10 @@
 #import "MFError.h"
 #import "MFLogging.h"
 #import "MFPreferences.h"
-
+#import "MGUtilities.h"
 #import <sys/xattr.h>
+#import <AppKit/AppKit.h>
+#import "NSString+CarbonFSRefCreation.h"
 
 #define FS_DIR_PATH @"~/Library/Application Support/Macfusion/Filesystems"
 
@@ -38,6 +40,7 @@
 - (NSError *)genericError;
 - (void)setError:(NSError*)error;
 - (NSTimer *)newTimeoutTimer;
+- (void)addFileSystemToFinderSidebar;
 @end
 
 @implementation MFServerFS
@@ -361,6 +364,8 @@
 }
 
 - (void)mount {
+	[super mount];
+
 	if (self.status == kMFStatusFSMounted) {
 		return;
 	}
@@ -382,6 +387,8 @@
 }
 
 - (void)unmount {
+	[super unmount];
+
 	MFLogS(self, @"Unmounting");
 	NSString *path = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
 	NSString *taskPath = @"/usr/sbin/diskutil";
@@ -394,7 +401,6 @@
 	[t setLaunchPath:taskPath];
 	[t setArguments:taskArguments];
 	[t launch];
-	
 	/*
 	[t waitUntilExit];
 	if ([t terminationStatus] != 0)
@@ -403,6 +409,66 @@
 		[t terminationStatus]);
 	}
 	 */
+}
+
+- (void)addFileSystemToFinderSidebar{
+	// Create a reference to the shared favorite's file list 
+	LSSharedFileListRef favoritesFileList = LSSharedFileListCreate(NULL, kLSSharedFileListFavoriteItems, NULL);
+
+	CFURLRef itemURL = (CFURLRef)[NSURL fileURLWithPath:[[self mountPath] stringByExpandingTildeInPath]];
+	CFStringRef itemName=(CFStringRef)[self name];
+	IconRef itemIcon=NULL;
+	LSSharedFileListItemRef item=NULL;
+	FSRef fileReference;
+	SInt16 label;
+
+	[[self mountPath] getFSRef:&fileReference createFileIfNecessary:NO];
+
+	if (favoritesFileList) {
+		// Insert an item to the list
+		if (GetIconRefFromFileInfo(&fileReference, 0, NULL, kFSCatInfoNone, NULL, kIconServicesUpdateIfNeededFlag, &itemIcon, &label) == noErr){
+			MFLogS(self, @"Icon reference cerated successfully: %@", [self iconPath]);
+		}
+
+		item=LSSharedFileListInsertItemURL(favoritesFileList, kLSSharedFileListItemLast, itemName, itemIcon, itemURL, NULL, NULL);
+		if (item){
+			CFRelease(item);
+		}
+		if (itemIcon) {
+			ReleaseIconRef(itemIcon);
+		}
+	}
+	else{
+		return;
+	}
+
+	CFRelease(favoritesFileList);
+}
+
+- (void)removeFileSystemFromFinderSidebar{
+	LSSharedFileListRef favoritesFileList=LSSharedFileListCreate(NULL, kLSSharedFileListFavoriteItems, NULL);
+	UInt32 seed;
+	CFArrayRef favoritesFileListItems=LSSharedFileListCopySnapshot(favoritesFileList, &seed);
+	LSSharedFileListItemRef itemReference;
+	CFStringRef	itemName;
+
+	// go through the list of favorites searching for the current item
+	for (id item in (NSArray *)favoritesFileListItems ) {
+		itemReference=(LSSharedFileListItemRef)item;
+		itemName=LSSharedFileListItemCopyDisplayName(itemReference);
+
+		if (itemName) {
+			//When found proceed to delete it
+			if ([(NSString *)itemName isEqualToString:[self name]]) {
+				MFLogS(self, @"Deleting an item named %@", (NSString *)itemName);
+				LSSharedFileListItemRemove(favoritesFileList, itemReference);
+			}
+			CFRelease(itemName);
+		}
+	}
+
+	CFRelease(favoritesFileList);
+	CFRelease(favoritesFileListItems);
 }
 
 # pragma mark Validation

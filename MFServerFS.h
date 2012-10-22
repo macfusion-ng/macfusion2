@@ -27,13 +27,9 @@
 	NSTimer *_timer;
 }
 
-
 // Server-specific initialization
-+ (MFServerFS *)loadFilesystemAtPath:(NSString*)path 
-							  error:(NSError**)error;
-
++ (MFServerFS *)loadFilesystemAtPath:(NSString*)path error:(NSError**)error;
 + (MFServerFS *)newFilesystemWithPlugin:(MFServerPlugin*)plugin;
-
 + (MFServerFS *)filesystemFromURL:(NSURL*)url plugin:(MFServerPlugin*)p error:(NSError **)error;
 
 
