@@ -1,5 +1,5 @@
-Macfusion
-=========
+Macfusion 2
+===========
 
 [Macfusion][] brings servers from across the internet directly to your Mac's desktop!
 
@@ -12,17 +12,24 @@ Macfusion
 - Quickly connect to any server using the *Quick Connect* dialog, accessible from Macfusion's optional menu item.
 
 
-Dependencies
-============
+Download
+========
 
-For Mac OS X 10.6 and lower, you will need [MacFUSE][].
+You can download a [build of the development version][], currently only tested in Mac OS X Lion. 
 
-For Mac OS X 10.7 and greater, you need [Fuse for OSX][].
+Remember that depending on the operating system you are using you will have to install any of the following dependencies:
 
-Changes
-=======
+- For Mac OS X 10.6, you will need [MacFUSE][].
+- For Mac OS X 10.7 and greater, you need [Fuse for OSX][].
 
-The goals of this fork from the original repository is to fix as many bugs as possibe, you can download a [build of the development version][], currently only tested in Mac OS X Lion.
+Goals
+=====
+
+The goals of this fork from the original repository are to:
+
+- Update the icons and resources for a retina display resolution, if you are a designer and you can help, please contact me [@yosmark][].
+- Fix as many bugs as possible.
+- Release a stable 2.1 version in the near future.
 
 Current fixes
 =============
@@ -31,8 +38,11 @@ Current fixes
 - Application no longer crashes when deleting a filesystem.
 - Ability to expand the mount path, for example: `~/filesystem` to `/Users/yoshiki/filesystem`. 
 - Modified the menu application to toggle between mount and un-mount filesystem.
+- Added a way to add a mounted filesystem into the favorites file list.
+
 
 [Macfusion]:http://macfusionapp.org/releases/Macfusion_2.0.4.zip
 [MacFUSE]:http://code.google.com/p/macfuse/
 [Fuse for OSX]:http://osxfuse.github.com
 [build of the development version]:https://github.com/downloads/ElDeveloper/macfusion2/Macfusion.zip
+[@yosmark]:https://twitter.com/yosmark
