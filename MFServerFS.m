@@ -426,7 +426,7 @@
 	FSRef fileReference;
 	SInt16 label;
 
-	[[self mountPath] getFSRef:&fileReference createFileIfNecessary:NO];
+	[[self iconPath] getFSRef:&fileReference createFileIfNecessary:NO];
 
 	if (favoritesFileList) {
 		// Insert an item to the list
