@@ -20,7 +20,7 @@ You can download a [build of the development version][], currently only tested i
 Remember that depending on the operating system you are using you will have to install any of the following dependencies:
 
 - For Mac OS X 10.6, you will need [MacFUSE][].
-- For Mac OS X 10.7 and greater, you need [Fuse for OSX][].
+- For Mac OS X 10.7 and greater, you need [Fuse for OSX][], note that **you will need to check** the *"install MacFUSE compatibility layer"* option during the installation process, otherwise some parts of the software will be broken.
 
 Goals
 =====
@@ -41,7 +41,7 @@ Current fixes
 - Added a way to add a mounted filesystem into the favorites file list.
 
 
-[Macfusion]:http://macfusionapp.org/releases/Macfusion_2.0.4.zip
+[Macfusion]:http://macfusionapp.org/
 [MacFUSE]:http://code.google.com/p/macfuse/
 [Fuse for OSX]:http://osxfuse.github.com
 [build of the development version]:https://github.com/downloads/ElDeveloper/macfusion2/Macfusion.zip
