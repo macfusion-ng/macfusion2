@@ -68,8 +68,7 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 	[arguments addObject:[NSString stringWithFormat:@"-p%@", [parameters objectForKey:kNetFSPortParameter]]];
 
     [arguments addObject:@"-odefer_permissions"];
-    [arguments addObject:@"-ocache=no"];
-    [arguments addObject:@"-onolocalcaches"];
+    [arguments addObject:@"-oauto_cache"];
 	[arguments addObject:@"-oCheckHostIP=no"];
 	[arguments addObject:@"-oStrictHostKeyChecking=no"];
 	[arguments addObject:@"-oNumberOfPasswordPrompts=1"];
