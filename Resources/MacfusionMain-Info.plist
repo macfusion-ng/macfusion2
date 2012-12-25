@@ -53,5 +53,9 @@
 	<string>main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>GitSHA</key>
+	<string></string>
+	<key>GitStatus</key>
+	<string></string>
 </dict>
 </plist>
