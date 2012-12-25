@@ -239,6 +239,18 @@
 	}
 }
 
+- (IBAction)showAboutWindow:(id)sender{
+	NSURL *url = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"Contents/Info.plist"];
+	NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:url];
+	NSString *hash = [dictionary objectForKey:@"GitSHA"];
+	NSDictionary *options;
+
+	// version right now will be the current git SHA
+	options = [NSDictionary dictionaryWithObjectsAndKeys:hash,@"Version",nil];
+
+	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:options];
+}
+
 - (IBAction)showPreferences:(id)sender {
 	if (!preferencesController) {
 		preferencesController = [[MFPreferencesController alloc] initWithWindowNibName:@"MFPreferences"];

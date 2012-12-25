@@ -35,6 +35,7 @@ MFLogViewerController, MGActionButton;
 }
 
 - (IBAction)newFSPopupClicked:(id)sender;
+- (IBAction)showAboutWindow:(id)sender;
 - (IBAction)showPreferences:(id)sender;
 - (IBAction)startMenuItem:(id)sender;
 - (IBAction)showLogViewer:(id)sender;
