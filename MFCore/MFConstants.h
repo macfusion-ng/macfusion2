@@ -55,6 +55,7 @@
 #define kMFFSAdvancedOptionsParameter @"advancedOptions"
 #define kMFFSNoAppleDoubleParameter @"noAppleDouble"
 #define kMFFSNegativeVNodeCacheParameter @"negativeVNCache"
+#define kMFFSShowInFinderSidebar @"showInFinderSidebar"
 
 // Status keys
 #define KMFStatusDict @"statusInfo"

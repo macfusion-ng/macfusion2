@@ -204,6 +204,7 @@
 	[defaultParameterDictionary addEntriesFromDictionary:delegateDict];
 	[defaultParameterDictionary setObject:[NSNumber numberWithBool:NO] forKey:kMFFSNegativeVNodeCacheParameter];
 	[defaultParameterDictionary setObject:[NSNumber numberWithBool:NO] forKey:kMFFSNoAppleDoubleParameter];
+	[defaultParameterDictionary setObject:[NSNumber numberWithBool:NO] forKey:kMFFSShowInFinderSidebar];
 	
 	return [defaultParameterDictionary copy];
 }
@@ -258,7 +259,6 @@
 			if ([[self.parameters objectForKey:kMFFSNoAppleDoubleParameter] boolValue]) {
 				[taskArguments addObject:@"-onoappledouble"];
 			}
-			
 			if ([[self.parameters objectForKey:kMFFSNegativeVNodeCacheParameter] boolValue]) {
 				[taskArguments addObject:@"-onegative_vncache"];
 			}
@@ -381,7 +381,12 @@
 		[_timer invalidate];
 		_timer = [self newTimeoutTimer];
 		[_task launch];
-		[self addFileSystemToFinderSidebar];
+
+		// Check if it's desired to add the filesystem to the sidebar
+		if ([[self.parameters objectForKey:kMFFSShowInFinderSidebar] boolValue]) {
+			[self addFileSystemToFinderSidebar];
+		}
+
 		MFLogS(self, @"Task launched OK");
 	} else {
 		MFLogS(self, @"Mount point could not be created");
@@ -535,8 +540,11 @@
 
 - (void)handleTaskDidTerminate:(NSTask *)task {
 	// If any task terminates i. e. mount or unmount you have to remove the
-	// sidebar item for the filesystem as it is created on demand
-	[self removeFileSystemFromFinderSidebar];
+	// sidebar item of the filesystem as it is created on demand. Remember to
+	// only remove elements if the preference was on for the filesystem
+	if ([[self.parameters objectForKey:kMFFSShowInFinderSidebar] boolValue]) {
+		[self removeFileSystemFromFinderSidebar];
+	}
 	
 	if (self.status == kMFStatusFSMounted) {
 		// We are terminating after a mount has been successful
