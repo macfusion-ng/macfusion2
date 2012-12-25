@@ -3,7 +3,7 @@ Macfusion 2
 
 [Macfusion][] brings servers from across the internet directly to your Mac's desktop!
 
-![icon](https://github.com/downloads/ElDeveloper/macfusion2/macfusionIcon.png)
+![icon](http://i.imgur.com/zGp4o.png)
 
 - Mount files and documents as a "Volume" in the Mac OS X Finder
 - Work with your files using your favorite Mac OS X applications directly. No manual upload or download needed!
@@ -38,11 +38,11 @@ Current fixes
 - Application no longer crashes when deleting a filesystem.
 - Ability to expand the mount path, for example: `~/filesystem` to `/Users/yoshiki/filesystem`. 
 - Modified the menu application to toggle between mount and un-mount filesystem.
-- Added a way to add a mounted filesystem into the favorites file list.
+- Added a checkbox to add (or not) a mounted filesystem into Finder's sidebar.
 
 
 [Macfusion]:http://macfusionapp.org/
 [MacFUSE]:http://code.google.com/p/macfuse/
 [Fuse for OSX]:http://osxfuse.github.com
-[build of the development version]:https://github.com/downloads/ElDeveloper/macfusion2/Macfusion.zip
+[build of the development version]:http://cl.ly/1b3F2M1Z3h3r
 [@yosmark]:https://twitter.com/yosmark
