@@ -103,7 +103,7 @@ void prefsFSEventCallBack(ConstFSEventStreamRef streamRef,
 		return [NSNumber numberWithBool: YES];
 	}
 	if ([key isEqualToString:kMFPrefsTimeout]) {
-		return [NSNumber numberWithFloat: 5.0];
+		return [NSNumber numberWithFloat: 15.0];
 	}
 	if ([key isEqualToString: kMFPrefsAutosize]) {
 		return [NSNumber numberWithBool: YES];
