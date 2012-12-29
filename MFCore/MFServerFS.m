@@ -539,13 +539,6 @@
 }
 
 - (void)handleTaskDidTerminate:(NSTask *)task {
-	// If any task terminates i. e. mount or unmount you have to remove the
-	// sidebar item of the filesystem as it is created on demand. Remember to
-	// only remove elements if the preference was on for the filesystem
-	if ([[self.parameters objectForKey:kMFFSShowInFinderSidebar] boolValue]) {
-		[self removeFileSystemFromFinderSidebar];
-	}
-	
 	if (self.status == kMFStatusFSMounted) {
 		// We are terminating after a mount has been successful
 		// This may not quite be normal (may be for example a bad net connection)
@@ -591,12 +584,27 @@
                        context:(void *)context {
 	//MFLogS(self, @"Observes notification keypath %@ object %@, change %@",
 	//	   keyPath, object, change);
-	
+
+
+	// Since mount points and side-bar items are created when the user press
+	// the 'mount' button, they must be removed on the following circumstances:
+	//		- requested unmount
+	//		- failure while mounting the FS
+	//
+	// remember that the visibility in the sidebar is optional hence the check
 	if ([keyPath isEqualToString:kMFSTStatusKey ] && object == self && [[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:kMFStatusFSUnmounted]) {
+		if ([[self.parameters objectForKey:kMFFSShowInFinderSidebar] boolValue]) {
+			[self removeFileSystemFromFinderSidebar];
+		}
+
 		[self removeMountPoint];
 	}
 	
 	if ([keyPath isEqualToString:kMFSTStatusKey ] && object == self && [[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:kMFStatusFSFailed]) {
+		if ([[self.parameters objectForKey:kMFFSShowInFinderSidebar] boolValue]) {
+			[self removeFileSystemFromFinderSidebar];
+		}
+
 		[self removeMountPoint];
 	}
 	
