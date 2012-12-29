@@ -243,10 +243,15 @@
 	NSURL *url = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"Contents/Info.plist"];
 	NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:url];
 	NSString *hash = [dictionary objectForKey:@"GitSHA"];
+	NSString *status = [dictionary objectForKey:@"GitStatus"];
 	NSDictionary *options;
+	NSString *gitinfo;
 
-	// version right now will be the current git SHA
-	options = [NSDictionary dictionaryWithObjectsAndKeys:hash,@"Version",nil];
+	// add a star at the end of the SHA if the status is dirty else just the SHA
+	gitinfo=[NSString stringWithFormat:@"%@%@", hash, ([status isEqualToString:@"clean"] ? @"" : @" *")];
+
+	// version right now will be the current git SHA and status
+	options = [NSDictionary dictionaryWithObjectsAndKeys:gitinfo,@"Version",nil];
 
 	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:options];
 }
