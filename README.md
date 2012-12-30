@@ -15,17 +15,15 @@ Macfusion 2
 Download
 ========
 
-You can download a [build of the development version][], currently only tested in Mac OS X Lion. 
+You can download a [build of the development version][], currently only tested in Mac OS X Lion.
 
 Remember that depending on the operating system you are using you will have to install any of the following dependencies:
 
 - For Mac OS X 10.6, you will need [MacFUSE][].
 - For Mac OS X 10.7 and greater, you need [Fuse for OSX][], note that **you will need to check** the *"install MacFUSE compatibility layer"* option during the installation process, otherwise some parts of the software will be broken.
 
-Goals
-=====
-
-The goals of this fork from the original repository are to:
+Roadmap
+=======
 
 - Update the icons and resources for a retina display resolution, if you are a designer and you can help, please contact me [@yosmark][].
 - Fix as many bugs as possible.
@@ -39,10 +37,11 @@ Current fixes
 - Ability to expand the mount path, for example: `~/filesystem` to `/Users/yoshiki/filesystem`. 
 - Modified the menu application to toggle between mount and un-mount filesystem.
 - Added a checkbox to add (or not) a mounted filesystem into Finder's sidebar.
+- Added the output of `git rev-parse --short HEAD` to the about window.
 
 
 [Macfusion]:http://macfusionapp.org/
 [MacFUSE]:http://code.google.com/p/macfuse/
 [Fuse for OSX]:http://osxfuse.github.com
-[build of the development version]:http://cl.ly/1b3F2M1Z3h3r
+[build of the development version]:http://yoshikee.tumblr.com/post/39202253046/eldeveloper-macfusion
 [@yosmark]:https://twitter.com/yosmark
