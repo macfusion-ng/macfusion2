@@ -19,6 +19,7 @@ You can download a [build of the development version][], currently only tested i
 
 Remember that depending on the operating system you are using you will have to install any of the following dependencies:
 
+- X11, OSX 10.8 needs a manual installation of [XQuartz][]; it is very likely that you already have this installed in your computer if you are using 10.7 or lower.
 - For Mac OS X 10.6, you will need [MacFUSE][].
 - For Mac OS X 10.7 and greater, you need [Fuse for OSX][], note that **you will need to check** the *"install MacFUSE compatibility layer"* option during the installation process, otherwise some parts of the software will be broken.
 
@@ -43,5 +44,6 @@ Current fixes
 [Macfusion]:http://macfusionapp.org/
 [MacFUSE]:http://code.google.com/p/macfuse/
 [Fuse for OSX]:http://osxfuse.github.com
+[XQuartz]:http://xquartz.macosforge.org
 [build of the development version]:http://yoshikee.tumblr.com/post/39202253046/eldeveloper-macfusion
 [@yosmark]:https://twitter.com/yosmark
