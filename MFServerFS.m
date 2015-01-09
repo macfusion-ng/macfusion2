@@ -361,7 +361,7 @@
 }
 
 - (void)mount {
-	if (self.status == kMFStatusFSMounted) {
+	if ([self.status  isEqual: kMFStatusFSMounted]) {
 		return;
 	}
 	
@@ -459,12 +459,12 @@
 }
 
 - (void)handleTaskDidTerminate:(NSNotification *)note {
-	if (self.status == kMFStatusFSMounted) {
+	if ([self.status  isEqual: kMFStatusFSMounted]) {
 		// We are terminating after a mount has been successful
 		// This may not quite be normal (may be for example a bad net connection)
 		// But we'll set status to unmounted anyway
 		self.status = kMFStatusFSUnmounted;
-	} else if (self.status == kMFStatusFSWaiting) {
+	} else if ([self.status  isEqual: kMFStatusFSWaiting]) {
 		// We terminated while trying to mount
 		NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
 									self.uuid, kMFErrorFilesystemKey,

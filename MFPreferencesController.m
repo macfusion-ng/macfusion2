@@ -72,12 +72,12 @@
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
 	NSToolbarItem *item = nil;
 
-	if (itemIdentifier == kMFPrefsPluginToolbarIdentifier) {
+	if ([itemIdentifier  isEqual: kMFPrefsPluginToolbarIdentifier]) {
 		item = [[NSToolbarItem alloc] initWithItemIdentifier: kMFPrefsPluginToolbarIdentifier];
 
 		[item setLabel:@"Plugins"];
 		[item setImage:[NSImage imageNamed: @"NSAdvanced"]];
-	} else if (itemIdentifier == kMFPrefsGeneralToolbarIdentifier) {
+	} else if ([itemIdentifier  isEqual: kMFPrefsGeneralToolbarIdentifier]) {
 		item = [[NSToolbarItem alloc] initWithItemIdentifier: kMFPrefsGeneralToolbarIdentifier];
 		[item setLabel:@"General"];
 		[item setImage:[NSImage imageNamed: @"NSPreferencesGeneral"]];
@@ -102,9 +102,9 @@
 
 - (IBAction)toolbarItemChanged:(id)sender {
 	NSView *newView;
-	if ([sender itemIdentifier] == kMFPrefsPluginToolbarIdentifier) {
+	if ([[sender itemIdentifier]  isEqual: kMFPrefsPluginToolbarIdentifier]) {
 		newView = pluginPrefsView;
-	} else if ([sender itemIdentifier] == kMFPrefsGeneralToolbarIdentifier) {
+	} else if ([[sender itemIdentifier]  isEqual: kMFPrefsGeneralToolbarIdentifier]) {
 		newView = generalPrefsView;
 	} else {
 		return;
