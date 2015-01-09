@@ -91,7 +91,7 @@
 
 - (CGFloat)heightForCellInWidth:(CGFloat)width {
 	NSDictionary *messageDict = [self representedObject];
-	NSString *key = [NSString stringWithFormat: @"%d",messageDict];
+	NSString *key = [NSString stringWithFormat: @"%@",messageDict];
 	if ([_heightCache objectForKey: key]) {
 		return [[_heightCache objectForKey: key] floatValue];
 	} else {
