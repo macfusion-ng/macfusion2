@@ -1325,28 +1325,22 @@ enum {
 	
 	if (((samplesPerPixel == 3) && (bitsPerPixel == 24)) || ((samplesPerPixel == 4) && (bitsPerPixel == 32)))
 	{
-		CGDirectPaletteRef cgPal;
-		CGDeviceColor cgCol;
-
 		rawDataSize = pixelsWide * pixelsHigh;
 		hRawData = NewHandle( rawDataSize );
 		if (hRawData == NULL)
 			return NULL;
 		pRawData = (unsigned char*) *hRawData;
 		
-		cgPal = CGPaletteCreateDefaultColorPalette();
-		
 		pDest = pRawData;
 		if (bitsPerPixel == 32) {
 			for (y = 0; y < pixelsHigh; y++) {
 				pSrc = bitmapData + y * bytesPerRow;
 				for (x = 0; x < pixelsWide; x++) {
-					cgCol.red = ((float)*(pSrc)) / 255;
-					cgCol.green = ((float)*(pSrc+1)) / 255;
-					cgCol.blue = ((float)*(pSrc+2)) / 255;
-	
-					*pDest++ = CGPaletteGetIndexForColor(cgPal, cgCol);
-	
+                    unsigned char r = *(pSrc + 1);
+                    unsigned char g = *(pSrc + 2);
+                    unsigned char b = *(pSrc + 3);
+                    
+                    *pDest++ = (0 << 24) | (r << 16) | (g << 8) | b;
 					pSrc+=4;
 				}
 			}
@@ -1354,18 +1348,15 @@ enum {
 			for (y = 0; y < pixelsHigh; y++) {
 				pSrc = bitmapData + y * bytesPerRow;
 				for (x = 0; x < pixelsWide; x++) {
-					cgCol.red = ((float)*(pSrc)) / 255;
-					cgCol.green = ((float)*(pSrc+1)) / 255;
-					cgCol.blue = ((float)*(pSrc+2)) / 255;
-	
-					*pDest++ = CGPaletteGetIndexForColor(cgPal, cgCol);
-	
+                    unsigned char r = *(pSrc + 1);
+                    unsigned char g = *(pSrc + 2);
+                    unsigned char b = *(pSrc + 3);
+                    
+                    *pDest++ = (0 << 24) | (r << 16) | (g << 8) | b;
 					pSrc+=3;
 				}
 			}
 		}
-		
-		CGPaletteRelease(cgPal);
 	}
 	else
 	{
