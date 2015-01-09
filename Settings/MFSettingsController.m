@@ -29,6 +29,7 @@
 #import "MFEditingController.h"
 #import "MFPreferences.h"
 #import "MFLogging.h"
+#import "MGActionButton.h"
 
 @interface MFSettingsController(PrivateAPI)
 - (void)editFilesystem:(MFClientFS*)fs;

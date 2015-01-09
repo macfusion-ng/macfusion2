@@ -20,6 +20,7 @@
 #import "MFServerProtocol.h"
 #import "MFConstants.h"
 #import "MFClient.h"
+#import "MFServerFS.h"
 
 #define LOG_FILE_PATH @"~/Library/Logs/MacFusion2.log"
 

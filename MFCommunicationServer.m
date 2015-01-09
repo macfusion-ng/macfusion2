@@ -23,6 +23,7 @@
 #import "MFClientProtocol.h"
 #import "MFLogging.h"
 #import "MFCore.h"
+#import "MFServerFS.h"
 
 @implementation MFCommunicationServer
 static MFCommunicationServer *sharedServer = nil;

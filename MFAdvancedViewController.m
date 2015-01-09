@@ -8,6 +8,7 @@
 
 #import "MFAdvancedViewController.h"
 #import "MFClientFS.h"
+#import "MFIconSettingImageView.h"
 
 @implementation MFAdvancedViewController
 - (void)awakeFromNib {
