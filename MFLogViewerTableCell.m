@@ -41,7 +41,7 @@
 		_formatter = [NSDateFormatter new];
 		[_formatter  setDateStyle:NSDateFormatterShortStyle];
 		[_formatter setTimeStyle:NSDateFormatterShortStyle];
-		_heightCache = [NSMapTable mapTableWithStrongToStrongObjects];
+		_heightCache = [NSMapTable strongToStrongObjectsMapTable];
 	}
 	
 	return self;
