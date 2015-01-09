@@ -46,6 +46,6 @@
 // validate
 - (BOOL)validateParametersWithError:(NSError**)error;
 
-@property(retain) MFServerPlugin *plugin;
+@property(strong) MFServerPlugin *plugin;
 @property(assign, readwrite) BOOL pauseTimeout;
 @end

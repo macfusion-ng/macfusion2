@@ -46,13 +46,13 @@
 - (id <MFFSDelegateProtocol>)delegate;
 - (void)updateSecrets;
 
-@property(readwrite, assign) NSString *status;
-@property(readonly, assign) NSString *uuid;
+@property(readwrite, strong) NSString *status;
+@property(readonly, strong) NSString *uuid;
 @property(readonly) NSString *mountPath;
 @property(readonly) NSString *name;
 @property(readonly) NSMutableDictionary *parameters;
 @property(readonly) NSDictionary *statusInfo;
-@property (readwrite, retain) NSMutableDictionary *secrets;
+@property (readwrite, strong) NSMutableDictionary *secrets;
 @property(readonly) NSString *pluginID;
 @property(readonly) NSString *descriptionString;
 @property(readonly) NSString *iconPath;

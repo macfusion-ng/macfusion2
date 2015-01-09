@@ -34,5 +34,5 @@
 - (IBAction)quickMount:(id)sender;
 - (IBAction)recentClicked:(id)sender;
 
-@property(readonly, retain) MFClient* client;
+@property(readonly, strong) MFClient* client;
 @end

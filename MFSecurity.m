@@ -139,7 +139,7 @@ SecAccessRef keychainAccessRefForFilesystem(MFFilesystem* fs) {
 		}
 	}
 	
-	error = SecAccessCreate((CFStringRef)serviceNameForFS( fs ), (CFArrayRef)[trustRefs copy], &accessRef);
+	error = SecAccessCreate((__bridge CFStringRef)serviceNameForFS( fs ), (CFArrayRef)CFBridgingRetain([trustRefs copy]), &accessRef);
 	if (error != noErr) {
 		// MFLogSO(self, fs, @"Failed to create access ref for fs %@ error %d", fs, error);
 		return NULL;

@@ -146,7 +146,7 @@
 	[tableViewMenu addItemWithTitle:@"Unmount" action:@selector(unmount) keyEquivalent:@""];
 	[tableViewMenu addItemWithTitle:@"Edit" action:@selector(editSelectedFilesystem:) keyEquivalent:@""];
 	
-	[[MFPreferences sharedPreferences] addObserver:self forKeyPath:kMFPrefsAutosize options:0 context:self];
+	[[MFPreferences sharedPreferences] addObserver:self forKeyPath:kMFPrefsAutosize options:0 context:(__bridge void *)(self)];
 	[filesystemTableView setIntercellSpacing: NSMakeSize(10, 0)];
 	
 	NSWindow *window = [filesystemTableView window];
@@ -205,7 +205,7 @@
 	[[client.filesystems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self.status == %@", kMFStatusFSMounted]] 
 	 makeObjectsPerformSelector:@selector(setClientFSDelegate:) withObject:self];
 	
-	[filesystemArrayController addObserver:self forKeyPath:@"arrangedObjects" options:NSKeyValueObservingOptionNew context:self];
+	[filesystemArrayController addObserver:self forKeyPath:@"arrangedObjects" options:NSKeyValueObservingOptionNew context:(__bridge void *)(self)];
 	[self resizeWindowForContent];
 	[newFSActionButton setMenu:[self newFilesystemMenu]];
 }
@@ -395,7 +395,7 @@
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (context == self) {
+    if (context == (__bridge void *)(self)) {
 		[self resizeWindowForContent];
 	} else {
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -579,8 +579,7 @@
 	mfcKaboomMacfusion();
 }
 
-- (void)finalize {
-	[super finalize];
+- (void)dealloc {
 	[client setDelegate:nil];
 }
 

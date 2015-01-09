@@ -63,37 +63,37 @@ enum {
 
 + (IconFamily*) iconFamily
 {
-    return [[[IconFamily alloc] init] autorelease];
+    return [[IconFamily alloc] init];
 }
 
 + (IconFamily*) iconFamilyWithContentsOfFile:(NSString*)path
 {
-    return [[[IconFamily alloc] initWithContentsOfFile:path] autorelease];
+    return [[IconFamily alloc] initWithContentsOfFile:path];
 }
 
 + (IconFamily*) iconFamilyWithIconOfFile:(NSString*)path
 {
-    return [[[IconFamily alloc] initWithIconOfFile:path] autorelease];
+    return [[IconFamily alloc] initWithIconOfFile:path];
 }
 
 + (IconFamily*) iconFamilyWithIconFamilyHandle:(IconFamilyHandle)hNewIconFamily
 {
-    return [[[IconFamily alloc] initWithIconFamilyHandle:hNewIconFamily] autorelease];
+    return [[IconFamily alloc] initWithIconFamilyHandle:hNewIconFamily];
 }
 
 + (IconFamily*) iconFamilyWithSystemIcon:(int)fourByteCode
 {
-    return [[[IconFamily alloc] initWithSystemIcon:fourByteCode] autorelease];
+    return [[IconFamily alloc] initWithSystemIcon:fourByteCode];
 }
 
 + (IconFamily*) iconFamilyWithThumbnailsOfImage:(NSImage*)image
 {
-    return [[[IconFamily alloc] initWithThumbnailsOfImage:image] autorelease];
+    return [[IconFamily alloc] initWithThumbnailsOfImage:image];
 }
 
 + (IconFamily*) iconFamilyWithThumbnailsOfImage:(NSImage*)image usingImageInterpolation:(NSImageInterpolation)imageInterpolation
 {
-    return [[[IconFamily alloc] initWithThumbnailsOfImage:image usingImageInterpolation:imageInterpolation] autorelease];
+    return [[IconFamily alloc] initWithThumbnailsOfImage:image usingImageInterpolation:imageInterpolation];
 }
 
 // This is IconFamily's designated initializer.  It creates a new IconFamily that initially has no elements.
@@ -120,7 +120,6 @@ enum {
         OSStatus err = PtrToHand([data bytes], &storageMem, (long)[data length]);
         if( err != noErr )
         {
-            [self release];
             return nil;
         }
 
@@ -289,10 +288,9 @@ enum {
     }
     
     [iconImage512x512 lockFocus];
-    iconBitmap512x512 = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0, 512, 512)] autorelease];
+    iconBitmap512x512 = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0, 512, 512)];
     [iconImage512x512 unlockFocus];
     if (!iconBitmap512x512) {
-      [self release];
       return nil;
     }
     // Create an NSImage with the iconBitmap512x512 NSBitmapImageRep, that we
@@ -317,7 +315,6 @@ enum {
       [iconImage256x256 unlockFocus];
       if (iconBitmap256x256) {
         [self setIconFamilyElement:kIconServices256PixelDataARGB fromBitmapImageRep:iconBitmap256x256];
-        [iconBitmap256x256 release];
       }
     }
     
@@ -330,7 +327,6 @@ enum {
       if (iconBitmap128x128) {
         [self setIconFamilyElement:kThumbnail32BitData fromBitmapImageRep:iconBitmap128x128];
         [self setIconFamilyElement:kThumbnail8BitMask  fromBitmapImageRep:iconBitmap128x128];
-        [iconBitmap128x128 release];
       }
     }
     
@@ -346,7 +342,6 @@ enum {
         [self setIconFamilyElement:kLarge8BitData fromBitmapImageRep:iconBitmap32x32];
         [self setIconFamilyElement:kLarge8BitMask fromBitmapImageRep:iconBitmap32x32];
         [self setIconFamilyElement:kLarge1BitMask fromBitmapImageRep:iconBitmap32x32];
-        [iconBitmap32x32 release];
       }
     }
     
@@ -362,12 +357,10 @@ enum {
         [self setIconFamilyElement:kSmall8BitData fromBitmapImageRep:iconBitmap16x16];
         [self setIconFamilyElement:kSmall8BitMask fromBitmapImageRep:iconBitmap16x16];
         [self setIconFamilyElement:kSmall1BitMask fromBitmapImageRep:iconBitmap16x16];
-        [iconBitmap16x16 release];
       }
     }
     
     // Release the icon.
-    [bitmappedIconImage512x512 release];
         
     // Return the new icon family!
     return self;
@@ -376,19 +369,8 @@ enum {
 - (void) dealloc
 {
     DisposeHandle( (Handle)hIconFamily );
-    [super dealloc];
 }
 
-- (void) finalize
-{
-   /*  "Starting with Mac OS X v10.3, Memory Manager is thread safe"
-       -- Memory Manager Reference
-   */
-   DisposeHandle( (Handle)hIconFamily );
-   hIconFamily = NULL;
-
-   [super finalize];
-}
 
 - (NSBitmapImageRep*) bitmapImageRepWithAlphaForIconFamilyElement:(OSType)elementType;
 {
@@ -547,7 +529,7 @@ enum {
     //
     // Once we have the new NSBitmapImageRep, we get a pointer to its
     // bitmapData and copy our bitmap data in.
-    bitmapImageRep = [[[NSBitmapImageRep alloc]
+    bitmapImageRep = [[NSBitmapImageRep alloc]
         initWithBitmapDataPlanes:NULL
                       pixelsWide:pixelsWide
                       pixelsHigh:pixelsWide
@@ -560,7 +542,7 @@ enum {
                     bitmapFormat:bitmapFormat
 #endif
                      bytesPerRow:0
-                    bitsPerPixel:0] autorelease];
+                    bitsPerPixel:0];
     pBitmapImageRepBitmapData = [bitmapImageRep bitmapData];
     if (pBitmapImageRepBitmapData) {
         memcpy( pBitmapImageRepBitmapData, *hRawBitmapData,
@@ -584,7 +566,7 @@ enum {
 - (NSImage*) imageWithAllReps
 {
     NSImage* image = NULL;
-    image = [[[NSImage alloc] initWithData:[NSData dataWithBytes:*hIconFamily length:GetHandleSize((Handle)hIconFamily)]] autorelease];
+    image = [[NSImage alloc] initWithData:[NSData dataWithBytes:*hIconFamily length:GetHandleSize((Handle)hIconFamily)]];
     return image;
 }
 
@@ -1127,7 +1109,7 @@ enum {
     // is.  We need to change some properties ("size" and "scalesWhenResized")
     // of the original image, but we shouldn't change the original, so a copy
     // is necessary.
-    workingImage = [image copyWithZone:[image zone]];
+    workingImage = [image copyWithZone:nil];
     [workingImage setScalesWhenResized:YES];
     size = [workingImage size];
     workingImageRep = [workingImage bestRepresentationForRect:NSZeroRect context:nil hints:nil];
@@ -1178,10 +1160,9 @@ enum {
 
     [newImage unlockFocus];
 	
-    [workingImage release];
 
     // Return the new image!
-    return [newImage autorelease];
+    return newImage;
 }
 
 + (Handle) get32BitDataFromBitmapImageRep:(NSBitmapImageRep*)bitmapImageRep requiredPixelSize:(int)requiredPixelSize
@@ -1563,7 +1544,7 @@ enum {
 
 + (IconFamily*) iconFamilyWithScrap
 {
-    return [[[IconFamily alloc] initWithScrap] autorelease];
+    return [[IconFamily alloc] initWithScrap];
 }
 
 - initWithScrap
@@ -1575,7 +1556,6 @@ enum {
         data = [pboard dataForType:ICONFAMILY_PBOARD_TYPE];
     if( !data )
     {
-        [self release];
         return nil;
     }
 

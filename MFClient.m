@@ -293,7 +293,7 @@ OSStatus myKeychainCallback ( SecKeychainEvent keychainEvent,
 
 - (void)setupKeychainMonitoring {
 	SecKeychainEventMask eventMask = kSecUpdateEventMask | kSecAddEventMask;
-	SecKeychainAddCallback(myKeychainCallback , eventMask, self);
+	SecKeychainAddCallback(myKeychainCallback , eventMask, (__bridge void *)(self));
 }
 
 #pragma mark Logging

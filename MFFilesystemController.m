@@ -39,8 +39,8 @@
 - (void)removeFilesystem:(MFServerFS *)fs;
 - (void)invalidateTokensForFS:(MFServerFS *)fs;
 
-@property(readwrite, retain) NSMutableArray *filesystems;
-@property(readwrite, retain) NSMutableArray *recents;
+@property(readwrite, strong) NSMutableArray *filesystems;
+@property(readwrite, strong) NSMutableArray *recents;
 @end
 
 @implementation MFFilesystemController
@@ -105,7 +105,7 @@ static MFFilesystemController* sharedController = nil;
 		}
 	}
 	
-	return [[fsDefPaths copy] autorelease];
+	return [fsDefPaths copy];
 }
 
 - (void)loadFilesystems {
@@ -202,7 +202,7 @@ static MFFilesystemController* sharedController = nil;
 }
 
 - (void)recordRecentFilesystem:(MFServerFS *)fs {
-	NSMutableDictionary *params = [[fs.parameters mutableCopy] autorelease];
+	NSMutableDictionary *params = [fs.parameters mutableCopy];
 	// Strip the UUID so it never repeats
 	[params setValue:nil forKey:kMFFSUUIDParameter];
 	
@@ -268,8 +268,8 @@ static void diskUnMounted(DADiskRef disk, void *mySelf) {
 	DASessionScheduleWithRunLoop(_appearSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 	DASessionScheduleWithRunLoop(_disappearSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 	
-	DARegisterDiskAppearedCallback(_appearSession, kDADiskDescriptionMatchVolumeMountable, diskMounted, self);
-	DARegisterDiskDisappearedCallback(_disappearSession, kDADiskDescriptionMatchVolumeMountable, diskUnMounted, self);
+	DARegisterDiskAppearedCallback(_appearSession, kDADiskDescriptionMatchVolumeMountable, diskMounted, (__bridge void *)(self));
+	DARegisterDiskDisappearedCallback(_disappearSession, kDADiskDescriptionMatchVolumeMountable, diskUnMounted, (__bridge void *)(self));
 	
 	// Make the evenets go through
 	CFRunLoopRunInMode( kCFRunLoopDefaultMode, 1, YES );
@@ -309,7 +309,7 @@ static void diskUnMounted(DADiskRef disk, void *mySelf) {
 	CFUUIDRef uuidObject = CFUUIDCreate(NULL);
     CFStringRef uuidCFString = CFUUIDCreateString(NULL, uuidObject);
     CFRelease(uuidObject);
-    NSString *tokenString = [NSMakeCollectable(uuidCFString) autorelease];
+    NSString *tokenString = (__bridge NSString *)(uuidCFString);
 	if ([[_tokens allValues] containsObject: fs]) {
 		MFLogSO(self, fs, @"Uh oh ... adding a second token for an FS already in tokens");
 		// MFLogSO(self, _tokens, @"Tokens Before %@", _tokens);

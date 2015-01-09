@@ -66,27 +66,25 @@ NSArray *mfcSecretClientsForFileystem(MFFilesystem *fs) {
 		}
 	}
 	
-	return [[clientList copy] autorelease];
+	return [clientList copy];
 }
 
 BOOL mfcGetStateOfLoginItemWithPath(NSString *path) {
-	LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-	BOOL present = FALSE;
 	UInt32 seedValue;
-	NSArray  *loginItems = (NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, &seedValue);
+	LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+	NSArray  *loginItems = (__bridge NSArray *)(LSSharedFileListCopySnapshot(loginItemsRef, &seedValue));
+	BOOL present = FALSE;
 	for(id loginItem in loginItems) {
+        CFURLRef urlRef;
 		LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)loginItem;
-		NSURL *theURL = [NSURL new];
-        CFURLRef refURL = (__bridge CFURLRef) theURL;
-		LSSharedFileListItemResolve(itemRef, 0, &refURL, NULL);
-		present = ([[theURL path] isEqualToString:path]);
+		LSSharedFileListItemResolve(itemRef, 0, &urlRef, NULL);
+		NSURL *theURL = (__bridge NSURL*) urlRef;
+        present = [[theURL path] isEqualToString:path];
+        CFRelease(urlRef);
 		if (present) {
 			break;
 		}
 	}
-	
-	CFRelease((__bridge CFTypeRef)(loginItems));
-	CFRelease(loginItemsRef);
 	return present;
 }
 
@@ -97,20 +95,20 @@ BOOL mfcGetStateForAgentLoginItem() {
 
 BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 	NSString* agentPath = mfcAgentBundlePath();
-	LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-	
 	if (mfcGetStateOfLoginItemWithPath(agentPath) == state) {
 		return NO;
 	}
 	
 	UInt32 seedValue;
-	NSArray *loginItems = (NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, &seedValue);
+	LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+	NSArray *loginItems = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, &seedValue);
 	for(id loginItem in loginItems) {
+        CFURLRef urlRef;
 		LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)loginItem;
-		NSURL* theURL = [NSURL new];
-        CFURLRef refURL = (__bridge CFURLRef) theURL;
-		LSSharedFileListItemResolve(itemRef, 0, &refURL, NULL);
+		LSSharedFileListItemResolve(itemRef, 0, &urlRef, NULL);
+		NSURL *theURL = (__bridge NSURL*) urlRef;
 		NSString* checkPath = [[theURL path] lastPathComponent];
+        CFRelease(urlRef);
 		if ([checkPath isLike: @"*macfusionAgent*"]) {
 			LSSharedFileListItemRemove(loginItemsRef, itemRef);
 		}
@@ -118,11 +116,8 @@ BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 	
 	if(state == YES) {
 		LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemBeforeFirst, NULL, NULL, 
-									  (CFURLRef)[NSURL fileURLWithPath: agentPath], NULL, NULL);
+									  (__bridge CFURLRef)[NSURL fileURLWithPath: agentPath], NULL, NULL);
 	}
-	
-	CFRelease(loginItemsRef);
-	CFRelease((__bridge CFTypeRef)(loginItems));
 	return YES;
 }
 
@@ -241,7 +236,7 @@ void trashFSEventCallBack(ConstFSEventStreamRef streamRef,
 
 void mfcSetupTrashMonitoring() {
 	FSEventStreamRef eventStream = FSEventStreamCreate(NULL, trashFSEventCallBack, NULL,
-													   (CFArrayRef)[NSArray arrayWithObject: 
+													   (__bridge CFArrayRef)[NSArray arrayWithObject: 
 																	[mfcMainBundlePath() stringByDeletingLastPathComponent]],
 													   kFSEventStreamEventIdSinceNow,
 													   0, kFSEventStreamCreateFlagUseCFTypes);

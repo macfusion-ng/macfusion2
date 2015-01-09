@@ -239,10 +239,9 @@ NSString *headerStringForASLMessageDict(NSDictionary *messageDict) {
 	stdOut = b;
 }
 
-- (void)finalize {
+- (void)dealloc {
 	asl_close(aslClient);
 	close(fd);
-	[super finalize];
 }
 
 @synthesize delegate;

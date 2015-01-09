@@ -61,7 +61,7 @@ void prefsFSEventCallBack(ConstFSEventStreamRef streamRef,
 		FSEventStreamRef eventStream = FSEventStreamCreate(NULL, 
 														   prefsFSEventCallBack, 
 														   NULL, 
-														   (CFArrayRef)[NSArray arrayWithObject: [fullPrefsFilePath stringByDeletingLastPathComponent]],
+														   (__bridge CFArrayRef)[NSArray arrayWithObject: [fullPrefsFilePath stringByDeletingLastPathComponent]],
 														   kFSEventStreamEventIdSinceNow, 
 														   0, 
 														   kFSEventStreamCreateFlagUseCFTypes);

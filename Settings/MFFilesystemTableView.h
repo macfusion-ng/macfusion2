@@ -24,8 +24,8 @@
 	NSMapTable* progressIndicators;
 }
 
-@property(retain, readwrite) NSMutableArray* filesystems;
-@property(retain, readwrite) MFSettingsController* controller;
+@property(strong, readwrite) NSMutableArray* filesystems;
+@property(strong, readwrite) MFSettingsController* controller;
 
 - (MFClientFS*)clickedFilesystem;
 - (void)statusChangedForFS:(MFClientFS*)fs;

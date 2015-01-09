@@ -49,7 +49,7 @@
 - (MFClientFS *)filesystemWithUUID:(NSString *)uuid;
 - (MFClientPlugin *)pluginWithID:(NSString *)id;
 
-@property(retain) id delegate;
+@property(strong) id delegate;
 
 // All filesystems, including temporary ones
 @property(readonly) NSArray *filesystems;
