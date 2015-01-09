@@ -58,16 +58,16 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 	[arguments addObject:[parameters objectForKey:kMFFSMountPathParameter]];
 	[arguments addObject:[NSString stringWithFormat:@"-p%@", [parameters objectForKey:kNetFSPortParameter]]];
 	
-	[arguments addObject:@"-oCheckHostIP=no"];
-	[arguments addObject:@"-oStrictHostKeyChecking=no"];
 	[arguments addObject:@"-oNumberOfPasswordPrompts=1"];
 	if ([[parameters objectForKey:kSSHFSFollowSymlinksParameter] boolValue] == YES) {
 		[arguments addObject:@"-ofollow_symlinks"];	
 	}
 	
-	[arguments addObject:[NSString stringWithFormat:@"-ovolname=%@", [parameters objectForKey:kMFFSVolumeNameParameter]]];
+	[arguments addObject:@"-odefer_permissions"];
+	[arguments addObject:@"-oauto_cache"];
 	[arguments addObject:@"-ologlevel=debug1"];
 	[arguments addObject:@"-f"];
+	[arguments addObject:[NSString stringWithFormat:@"-ovolname=%@", [parameters objectForKey:kMFFSVolumeNameParameter]]];
 	[arguments addObject:[NSString stringWithFormat:@"-ovolicon=%@", [parameters objectForKey:kMFFSVolumeIconPathParameter]]];
 	// MFLogS(self, @"Arguments are %@", arguments);
 	return [arguments copy];
