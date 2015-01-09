@@ -56,6 +56,7 @@ NSDictionary *getGenericSecretsForFilesystemAndReturnItem(MFFilesystem *fs, SecK
 			return loadedDataDict;
 		} else {
 			// MFLogS(self, @"Failed to parse data in generic entry. data: %@", loadedDataDict);
+			SecKeychainItemFreeContent(NULL, passwordData);
 			return nil;
 		}
 	} else {
@@ -382,10 +383,10 @@ SInt32 showDialogForPasswordQuery(MFFilesystem* fs, BOOL* savePassword, NSString
 	}
 	
 	CFRelease(dialogTemplate);
-	CFRelease(passwordDialog);
 	int button = responseFlags & 0x3;
 	if (button == kCFUserNotificationAlternateResponse) {
 		// MFLogSO(self, fs, @"Exiting due to cancel on UI fs %@", fs);
+        CFRelease(passwordDialog);
 		return 1;
 	}
 	
@@ -396,7 +397,7 @@ SInt32 showDialogForPasswordQuery(MFFilesystem* fs, BOOL* savePassword, NSString
 	CFStringRef passwordRef = CFUserNotificationGetResponseValue(passwordDialog,kCFUserNotificationTextFieldValuesKey,
 																 0);
 	*password = (NSString *)passwordRef;
-	CFRelease(passwordRef);
+	CFRelease(passwordDialog);
 	
 	return 0;
 }
