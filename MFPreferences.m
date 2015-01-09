@@ -24,7 +24,7 @@ static MFPreferences *sharedPreferences = nil;
 + (MFPreferences *) sharedPreferences
 {
 	if (sharedPreferences == nil) {
-		[[self alloc] init];
+		sharedPreferences = [[self alloc] init];
 	}
 	
 	return sharedPreferences;

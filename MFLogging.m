@@ -109,7 +109,7 @@ static MFLogging *sharedLogging = nil;
 
 + (MFLogging *)sharedLogging {
 	if (sharedLogging == nil) {
-		[[self alloc] init];
+		sharedLogging = [[self alloc] init];
 	}
 	
 	return sharedLogging;

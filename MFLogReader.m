@@ -31,7 +31,7 @@ static MFLogReader *sharedReader;
 
 + (MFLogReader *)sharedReader {
 	if (sharedReader == nil) {
-		[[self alloc] init];	
+		sharedReader = [[self alloc] init];
 	}
 	
 	return sharedReader;

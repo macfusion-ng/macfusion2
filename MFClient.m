@@ -50,7 +50,7 @@ static MFClient *sharedClient = nil;
 #pragma mark Singleton methods
 + (MFClient *)sharedClient {
 	if (sharedClient == nil) {
-		[[self alloc] init];
+		sharedClient = [[self alloc] init];
 	}
 	
 	return sharedClient;
