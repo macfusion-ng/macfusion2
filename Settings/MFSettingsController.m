@@ -309,7 +309,7 @@
 		[deleteConfirmation beginSheetModalForWindow: [filesystemTableView window]
 									   modalDelegate:self
 									  didEndSelector:@selector(deleteConfirmationAlertDidEnd:returnCode:contextInfo:)
-										 contextInfo:filesystemsToDelete];
+										 contextInfo:(__bridge void *)(filesystemsToDelete)];
 	}
 }
 
@@ -367,7 +367,7 @@
 
 
 - (void)deleteConfirmationAlertDidEnd:(NSAlert*)alert returnCode:(NSInteger)code contextInfo:(void *)context {
-	NSArray *filesystemsToDelete = (NSArray *)context;
+	NSArray *filesystemsToDelete = (__bridge NSArray *)context;
 	if (code == NSAlertSecondButtonReturn) {
 		
 	} else if (code == NSAlertFirstButtonReturn) {

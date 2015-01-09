@@ -279,7 +279,7 @@ static MFClient *sharedClient = nil;
 OSStatus myKeychainCallback ( SecKeychainEvent keychainEvent,
 							 SecKeychainCallbackInfo *info,
 							 void *context ) {
-	MFClient *self = (MFClient *)context;
+	MFClient *self = (__bridge MFClient *)context;
 	// MFLogS(self, @"Keychain callback received event is %d", keychainEvent);
 	SecKeychainItemRef itemRef = info -> item;
 	NSString *uuid = mfsecUUIDForKeychainItemRef(itemRef);

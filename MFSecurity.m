@@ -135,7 +135,7 @@ SecAccessRef keychainAccessRefForFilesystem(MFFilesystem* fs) {
 		if (error != noErr) {
 			// MFLogSO(self, fs, @"Could not create trusted ref for path %@ fs %@ error %d", path, fs, error);
 		} else {
-			[trustRefs addObject: (id)trustedAppRef];
+			[trustRefs addObject: (__bridge id)trustedAppRef];
 		}
 	}
 	
@@ -353,11 +353,11 @@ SInt32 showDialogForPasswordQuery(MFFilesystem* fs, BOOL* savePassword, NSString
 	
 	const void* keychainValues[] = {
 		@"Password Needed",
-		dialogText,
+		(__bridge const void *)(dialogText),
 		@"Password",
 		@"Save Password in Keychain",
 		@"Cancel",
-		iconURL
+		(__bridge const void *)(iconURL)
 	};
 	
 	SInt32 error;
@@ -396,7 +396,7 @@ SInt32 showDialogForPasswordQuery(MFFilesystem* fs, BOOL* savePassword, NSString
 	// MFLogSO(self, fs, @"Save password is %d Flags %d fs %@", savePassword, responseFlags, fs);
 	CFStringRef passwordRef = CFUserNotificationGetResponseValue(passwordDialog,kCFUserNotificationTextFieldValuesKey,
 																 0);
-	*password = (NSString *)passwordRef;
+	*password = (__bridge NSString *)passwordRef;
 	CFRelease(passwordDialog);
 	
 	return 0;

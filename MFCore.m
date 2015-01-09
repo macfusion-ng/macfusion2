@@ -75,16 +75,17 @@ BOOL mfcGetStateOfLoginItemWithPath(NSString *path) {
 	UInt32 seedValue;
 	NSArray  *loginItems = (NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, &seedValue);
 	for(id loginItem in loginItems) {
-		LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)loginItem;
+		LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)loginItem;
 		NSURL *theURL = [NSURL new];
-		LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*)&theURL, NULL);
+        CFURLRef refURL = (__bridge CFURLRef) theURL;
+		LSSharedFileListItemResolve(itemRef, 0, &refURL, NULL);
 		present = ([[theURL path] isEqualToString:path]);
 		if (present) {
 			break;
 		}
 	}
 	
-	CFRelease(loginItems);
+	CFRelease((__bridge CFTypeRef)(loginItems));
 	CFRelease(loginItemsRef);
 	return present;
 }
@@ -105,9 +106,10 @@ BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 	UInt32 seedValue;
 	NSArray *loginItems = (NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, &seedValue);
 	for(id loginItem in loginItems) {
-		LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)loginItem;
+		LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)loginItem;
 		NSURL* theURL = [NSURL new];
-		LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*)&theURL, NULL);
+        CFURLRef refURL = (__bridge CFURLRef) theURL;
+		LSSharedFileListItemResolve(itemRef, 0, &refURL, NULL);
 		NSString* checkPath = [[theURL path] lastPathComponent];
 		if ([checkPath isLike: @"*macfusionAgent*"]) {
 			LSSharedFileListItemRemove(loginItemsRef, itemRef);
@@ -120,7 +122,7 @@ BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 	}
 	
 	CFRelease(loginItemsRef);
-	CFRelease(loginItems);
+	CFRelease((__bridge CFTypeRef)(loginItems));
 	return YES;
 }
 
@@ -164,8 +166,8 @@ void mfcCheckIntegrity() {
 		CopyProcessName( &currentPSN, &processName );
 		pid_t processPID = 0;
 		
-		BOOL isAgent = [(NSString*)processName isEqualToString: @"macfusionAgent"];
-		BOOL isMenuling = [(NSString*)processName isEqualToString: @"macfusionMenuling"];
+		BOOL isAgent = [(__bridge NSString*)processName isEqualToString: @"macfusionAgent"];
+		BOOL isMenuling = [(__bridge NSString*)processName isEqualToString: @"macfusionMenuling"];
 		
 		if (isAgent || isMenuling) {
 			error = GetProcessBundleLocation( &currentPSN, &bundleFSRef);
@@ -173,7 +175,7 @@ void mfcCheckIntegrity() {
 			
 			if (error == noErr) {
 				CFURLRef bundleURLRef = CFURLCreateFromFSRef( kCFAllocatorDefault, &bundleFSRef);
-				processPath = [ (NSURL*)bundleURLRef path ];
+				processPath = [ (__bridge NSURL*)bundleURLRef path ];
 				CFRelease( bundleURLRef );
 			} else {
 				processPath = (NSString*)[NSNull null]; 

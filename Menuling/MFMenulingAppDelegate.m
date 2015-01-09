@@ -56,7 +56,7 @@
 
 OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 						 void *userData) {
-	[(MFMenulingAppDelegate *)userData connectToServer:nil];
+	[(__bridge MFMenulingAppDelegate *)userData connectToServer:nil];
 	return noErr;
 }
 
@@ -70,7 +70,7 @@ OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 	myHotkeyId.id=1;
 	RegisterEventHotKey(40, cmdKey+optionKey+controlKey, myHotkeyId, GetApplicationEventTarget(), 0, &myHotkeyRef);
 	
-	InstallApplicationEventHandler(&MyHotKeyHandler,1,&eventType,self,NULL);
+	InstallApplicationEventHandler(&MyHotKeyHandler,1,&eventType,(__bridge void*)self,NULL);
 }
 
 - (void)awakeFromNib {

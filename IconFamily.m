@@ -105,7 +105,6 @@ enum {
     if (self) {
         hIconFamily = (IconFamilyHandle) NewHandle( 0 );
         if (hIconFamily == NULL) {
-            [self autorelease];
             return nil;
         }
     }
@@ -142,12 +141,10 @@ enum {
             hIconFamily = NULL;
         }
 		if (![path getFSRef:&ref createFileIfNecessary:NO]) {
-			[self autorelease];
 			return nil;
 		}
 		result = ReadIconFromFSRef( &ref, &hIconFamily );
 		if (result != noErr) {
-			[self autorelease];
 			return nil;
 		}
     }
@@ -185,7 +182,6 @@ enum {
 
         if( ![path getFSRef:&ref createFileIfNecessary:NO] )
         {
-            [self autorelease];
             return nil;
         }
 
@@ -201,7 +197,6 @@ enum {
 
         if (result != noErr)
         {
-            [self autorelease];
             return nil;
         }
 
@@ -214,7 +209,6 @@ enum {
 
         if (result != noErr || !hIconFamily)
         {
-            [self autorelease];
             return nil;
         }
     }
@@ -239,7 +233,6 @@ enum {
 
         if (result != noErr)
         {
-            [self autorelease];
             return nil;
         }
 
@@ -250,7 +243,6 @@ enum {
 
         if (result != noErr || !hIconFamily)
         {
-            [self autorelease];
             return nil;
         }
 
@@ -293,7 +285,6 @@ enum {
     // our methods can scan the image data, using initWithFocusedViewRect:.
     iconImage512x512 = [IconFamily resampleImage:image toIconWidth:512 usingImageInterpolation:imageInterpolation];
     if (!iconImage512x512) {
-      [self autorelease];
       return nil;
     }
     
@@ -314,7 +305,6 @@ enum {
     [bitmappedIconImage512x512 addRepresentation:iconBitmap512x512];
     
     if (!bitmappedIconImage512x512) {
-      [self autorelease];
       return nil;
     }
     
