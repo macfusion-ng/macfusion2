@@ -85,6 +85,8 @@ BOOL mfcGetStateOfLoginItemWithPath(NSString *path) {
 			break;
 		}
 	}
+	CFRelease(loginItemsRef);
+	CFRelease((__bridge CFTypeRef)(loginItems));
 	return present;
 }
 
@@ -118,6 +120,8 @@ BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 		LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemBeforeFirst, NULL, NULL, 
 									  (__bridge CFURLRef)[NSURL fileURLWithPath: agentPath], NULL, NULL);
 	}
+	CFRelease(loginItemsRef);
+	CFRelease((__bridge CFTypeRef)(loginItems));
 	return YES;
 }
 

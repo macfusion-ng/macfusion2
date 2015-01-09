@@ -309,7 +309,7 @@ static void diskUnMounted(DADiskRef disk, void *mySelf) {
 	CFUUIDRef uuidObject = CFUUIDCreate(NULL);
     CFStringRef uuidCFString = CFUUIDCreateString(NULL, uuidObject);
     CFRelease(uuidObject);
-    NSString *tokenString = (__bridge NSString *)(uuidCFString);
+    NSString *tokenString = (__bridge_transfer NSString *)(uuidCFString);
 	if ([[_tokens allValues] containsObject: fs]) {
 		MFLogSO(self, fs, @"Uh oh ... adding a second token for an FS already in tokens");
 		// MFLogSO(self, _tokens, @"Tokens Before %@", _tokens);
