@@ -68,7 +68,7 @@
 		[NSApp terminate: self];
 	} else if (returnCode == NSAlertFirstButtonReturn) {
 		mfcLaunchAgent();
-		[[NSRunLoop currentRunLoop] runUntilDate:[[NSDate date] addTimeInterval: 3]];
+		[[NSRunLoop currentRunLoop] runUntilDate:[[NSDate date] dateByAddingTimeInterval: 3]];
 		
 		if ([client establishCommunication]) {
 			[client fillInitialStatus];
@@ -106,7 +106,7 @@
 		if (agentRunning) {
 			// Agent is running. Wait a bit for it to set up IPC
 			MFLogS(self, @"Waiting for agent");
-			NSDate* stopDate = [[NSDate date] addTimeInterval: 5.0];
+			NSDate* stopDate = [[NSDate date] dateByAddingTimeInterval: 5.0];
 			[[NSRunLoop currentRunLoop] runUntilDate: stopDate];
 			if ([client establishCommunication]) {
 				[client fillInitialStatus];
@@ -526,7 +526,7 @@
 		[NSApp terminate: self];
 	} else if (returnValue == NSAlertSecondButtonReturn) {
 		mfcLaunchAgent();
-		[[NSRunLoop currentRunLoop] runUntilDate:[[NSDate date] addTimeInterval: 1.5]];
+		[[NSRunLoop currentRunLoop] runUntilDate:[[NSDate date] dateByAddingTimeInterval: 1.5]];
 		if ([client establishCommunication]) {
 			[client fillInitialStatus];
 		} else {
