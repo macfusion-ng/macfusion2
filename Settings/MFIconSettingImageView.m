@@ -48,6 +48,10 @@
 	[self addObserver:self forKeyPath:@"fs.imagePath" options:NSKeyValueObservingOptionNew context:(__bridge void *)(self)];
 }
 
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"fs.imagePath" ];
+}
+
 - (void)drawRect:(NSRect)rect {
 	[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 	NSImage *imageToDraw = [[_fs coloredImage] imageScaledToSize:NSMakeSize(rect.size.width, rect.size.height)];
