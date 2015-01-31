@@ -231,7 +231,7 @@ static CGColorRef CGColorCreateFromNSColor(CGColorSpaceRef  colorSpace, NSColor 
 												 CGImageGetBitsPerComponent( cgImageOriginalRep ),
 												 CGImageGetBytesPerRow( cgImageOriginalRep ),
 												 CGImageGetColorSpace( cgImageOriginalRep ),
-												 kCGImageAlphaPremultipliedLast );
+												 (CGBitmapInfo)kCGImageAlphaPremultipliedLast );
 	
 	CGContextSetInterpolationQuality( context, kCGInterpolationHigh );
 	
