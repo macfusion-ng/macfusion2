@@ -29,14 +29,6 @@
 	return self;
 }
 
-static void ClearBitmapImageRep(NSBitmapImageRep *bitmap) {
-    unsigned char *bitmapData = [bitmap bitmapData];
-    if (bitmapData != NULL) {
-        // A fast alternative to filling with [NSColor clearColor].
-        bzero(bitmapData, [bitmap bytesPerRow] * [bitmap pixelsHigh]);
-    }
-}
-
 - (void)addTabViewItem:(NSTabViewItem*)item {
 	[_viewDimensions setObject: [NSValue valueWithSize:[[item view] frame].size] forKey:[item label]];
 	[super addTabViewItem:item];
@@ -63,40 +55,6 @@ static void ClearBitmapImageRep(NSBitmapImageRep *bitmap) {
 	[super selectTabViewItem:tabViewItem];
 	NSSize newViewSize = [[_viewDimensions objectForKey:[tabViewItem label]] sizeValue];
 	[[tabViewItem view] setFrameSize: newViewSize];
-	
-	/*
-	if ([self selectedTabViewItem] == nil || [self isHiddenOrHasHiddenAncestor])
-	{
-		[super selectTabViewItem: tabViewItem];
-		return;
-	}
-		
-	NSView* initialView = [[self selectedTabViewItem] view];
-	NSView* finalView = [tabViewItem view];
-	NSRect rect = NSUnionRect([initialView bounds], [finalView bounds]);
-	imageRect = NSUnionRect([initialView frame], [finalView frame]);
-	
-	// MFLogS(self, @"imageRect %@ rect %@", NSStringFromRect( imageRect ), NSStringFromRect( rect) );
-	NSBitmapImageRep* initialContentBitmap = [initialView bitmapImageRepForCachingDisplayInRect:rect];
-	ClearBitmapImageRep(initialContentBitmap);
-	[initialView cacheDisplayInRect:rect toBitmapImageRep:initialContentBitmap];
-	
-	[super selectTabViewItem: tabViewItem];
-	NSBitmapImageRep* finalContentBitmap = [finalView bitmapImageRepForCachingDisplayInRect:rect];
-	ClearBitmapImageRep(finalContentBitmap);
-	[finalView cacheDisplayInRect:rect toBitmapImageRep:finalContentBitmap];
-	
-	CIImage* initialCIImage = [[CIImage alloc] initWithBitmapImageRep:initialContentBitmap];
-	CIImage* finalCIImage = [[CIImage alloc] initWithBitmapImageRep:finalContentBitmap];
-	[self setTransitionForinitialCIImage:initialCIImage finalCIImage:finalCIImage];
-	
-	animation = [[TabViewAnimation alloc] initWithDuration: .5 animationCurve:NSAnimationEaseInOut];
-	[animation setDelegate: self];
-	[finalView setHidden: YES];
-	// [animation startAnimation];
-	[finalView setHidden: NO];
-	animation = nil;
-	 */;
 }
 
 - (NSSize)sizeWithTabviewItem:(NSTabViewItem *)item {

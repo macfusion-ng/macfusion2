@@ -17,8 +17,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-static CGColorRef CGColorCreateFromNSColor (CGColorSpaceRef  colorSpace, NSColor *color);
-
 @class CIImage;
 
 @interface NSImage (MGNSImage)
