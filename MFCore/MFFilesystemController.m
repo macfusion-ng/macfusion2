@@ -30,7 +30,6 @@
 
 @interface MFFilesystemController ()
 - (void)setUpVolumeMonitoring;
-- (void)removeFilesystem:(MFServerFS *)fs;
 - (void)loadRecentFilesystems;
 - (void)recordRecentFilesystem:(MFServerFS *)fs;
 - (void)addMountedPath:(NSString *)path;
