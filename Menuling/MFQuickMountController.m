@@ -58,9 +58,11 @@
 	
 	NSURL *url = [NSURL URLWithString:[qmTextField stringValue]];
 	if (!url || ![url scheme] || ![url host]) {
-		NSAlert *alert = [NSAlert alertWithMessageText: @"Could not parse URL" defaultButton:@"OK" alternateButton:@""otherButton:@"" informativeTextWithFormat:@"Please check the format"];
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setMessageText:@"Could not parse URL"];
+		[alert setInformativeText:@"Please check the format"];
 		[alert setAlertStyle:NSCriticalAlertStyle];
-		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+		[alert runModal];
 	} else {
 		NSError *error;
 		MFClientFS *tempFS = [[MFClient sharedClient] quickMountFilesystemWithURL:url error:&error];
@@ -90,13 +92,16 @@
 		}
 		
 		[indicator stopAnimation:self];
-		NSAlert* alert = [NSAlert alertWithMessageText:@"Failed to Mount Filesystem"
-								   defaultButton:@"OK"
-								 alternateButton:@""
-									 otherButton:@""
-					   informativeTextWithFormat:@"No error was given"];
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setMessageText:@"Failed to mount Filesystem"];
+		[alert setInformativeText:@"No error was given"];
 		[alert setAlertStyle:NSCriticalAlertStyle];
-		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(self)];
+		[alert beginSheetModalForWindow:[self window] completionHandler:^(NSInteger returnCode) {
+			// Block version of alertDidEnd
+			[indicator stopAnimation:self];
+			[indicator setHidden:YES];
+			[connectButton setHidden:NO];
+		}];
 	}
 }
 
