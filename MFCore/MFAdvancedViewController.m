@@ -20,8 +20,8 @@
 	[panel setAllowsMultipleSelection:NO];
 	[panel setAllowedFileTypes:[NSArray arrayWithObject: @"icns"]];
 	NSInteger returnValue = [panel runModal];
-	if (returnValue == NSOKButton && [[panel URLs] count] > 0) {
-		NSString *filename = [[[panel URLs] objectAtIndex:0] path];
+	if (returnValue == NSModalResponseOK && [[panel URLs] count] > 0) {
+		NSString *filename = [[panel URLs] objectAtIndex:0];
 		NSImage *iconImage = [[NSImage alloc] initWithContentsOfFile:filename];
 		if (iconImage) {
 			[(MFClientFS*)[self representedObject] setIconImage:iconImage];
