@@ -442,6 +442,9 @@ NSString *mfsecUUIDForKeychainItemRef(SecKeychainItemRef itemRef) {
 
 	SecKeychainItemCopyAttributesAndData(itemRef, &attrInfo, NULL, &attrList, NULL, NULL);
 	// MFLogS(self, @"Loaded %d attrs", attrList->count);
+	if(!attrList || !attrList->attr) {
+		return Nil;
+	}
 	attr = attrList -> attr;
 	NSString *uuid = [NSString stringWithCString:attr->data encoding:NSUTF8StringEncoding];
 	SecKeychainItemFreeAttributesAndData(attrList, NULL);

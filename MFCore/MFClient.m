@@ -280,10 +280,12 @@ OSStatus myKeychainCallback ( SecKeychainEvent keychainEvent,
 	// MFLogS(self, @"Keychain callback received event is %d", keychainEvent);
 	SecKeychainItemRef itemRef = info -> item;
 	NSString *uuid = mfsecUUIDForKeychainItemRef(itemRef);
-	MFClientFS *fs = [self filesystemWithUUID:uuid];
-	if (fs) {
-		// MFLogS(self, @"Updating secrets for fs %@ due to keychain change", fs);
-		[fs updateSecrets];
+	if (uuid) {
+		MFClientFS *fs = [self filesystemWithUUID:uuid];
+		if (fs) {
+			//MFLogS(self, @"Updating secrets for fs %@ due to keychain change", fs);
+			[fs updateSecrets];
+		}
 	}
 	return 0;
 }
