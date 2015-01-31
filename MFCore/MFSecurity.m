@@ -38,9 +38,9 @@ NSDictionary *getGenericSecretsForFilesystemAndReturnItem(MFFilesystem *fs, SecK
 	void *passwordData;
 	NSString *serviceName = serviceNameForFS(fs);
 	OSStatus error = SecKeychainFindGenericPassword(NULL,
-													[serviceName lengthOfBytesUsingEncoding: NSUTF8StringEncoding],
+													(uint32_t)[serviceName lengthOfBytesUsingEncoding: NSUTF8StringEncoding],
 													[serviceName UTF8String],
-													[fs.uuid lengthOfBytesUsingEncoding: NSUTF8StringEncoding],
+													(uint32_t)[fs.uuid lengthOfBytesUsingEncoding: NSUTF8StringEncoding],
 													[fs.uuid UTF8String], 
 													&passwordLength, 
 													&passwordData, 
@@ -74,7 +74,7 @@ NSDictionary *getNetworkSecretsForFilesystemAndReturnItem(MFFilesystem *fs, SecK
 	NSString *passwordToReturn = nil;
 	
 	if (userName && hostName && port && protocol) {
-		OSStatus error = SecKeychainFindInternetPassword(NULL,[hostName lengthOfBytesUsingEncoding: NSUTF8StringEncoding],[hostName UTF8String],0,NULL,[userName lengthOfBytesUsingEncoding: NSUTF8StringEncoding],[userName UTF8String],0,NULL,port,protocol,(SecAuthenticationType)NULL,&passwordLength,&passwordData,itemRef);
+		OSStatus error = SecKeychainFindInternetPassword(NULL, (uint32_t)[hostName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], [hostName UTF8String],0,NULL,(uint32_t)[userName lengthOfBytesUsingEncoding: NSUTF8StringEncoding],[userName UTF8String],0,NULL,port,protocol,(SecAuthenticationType)NULL,&passwordLength,&passwordData,itemRef);
 		if (error == noErr) {
 			// MFLogS(self, @"Successfully found internet password for fs %@", fs);
 			NSString *password = [NSString stringWithCString:passwordData encoding:NSUTF8StringEncoding];
@@ -171,7 +171,7 @@ void setNetworkSecretsForFilesystem (NSDictionary* secretsDictionary, MFFilesyst
 			}
 				
 			// Modify
-			OSStatus error = SecKeychainItemModifyContent(itemRef,NULL,[password lengthOfBytesUsingEncoding: NSUTF8StringEncoding],[password UTF8String]);
+			OSStatus error = SecKeychainItemModifyContent(itemRef,NULL,(uint32_t)[password lengthOfBytesUsingEncoding: NSUTF8StringEncoding],[password UTF8String]);
 			if (error == noErr) {
 				// MFLogS(self, @"Successfully modified network secrets for fs %@", fs );
 			} else {
@@ -181,9 +181,9 @@ void setNetworkSecretsForFilesystem (NSDictionary* secretsDictionary, MFFilesyst
 		} else {
 			// Create
 			SecKeychainAttribute attrs[] = {
-				{ kSecLabelItemAttr, [hostName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char *)[hostName UTF8String] },
-				{ kSecAccountItemAttr, [userName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char *)[userName UTF8String] },
-				{ kSecServerItemAttr, [hostName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char *)[hostName UTF8String] },
+				{ kSecLabelItemAttr, (uint32_t)[hostName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char *)[hostName UTF8String] },
+				{ kSecAccountItemAttr, (uint32_t)[userName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char *)[userName UTF8String] },
+				{ kSecServerItemAttr, (uint32_t)[hostName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char *)[hostName UTF8String] },
 				{ kSecPortItemAttr, sizeof(int), (int *)&port },
 				{ kSecProtocolItemAttr, sizeof(SecProtocolType), (SecProtocolType *)&protocol }
 			};
@@ -196,7 +196,7 @@ void setNetworkSecretsForFilesystem (NSDictionary* secretsDictionary, MFFilesyst
 			SecItemClass itemClass = kSecInternetPasswordItemClass;
 			OSStatus error = SecKeychainItemCreateFromContent(itemClass, 
 															  &attributes, 
-															  [password lengthOfBytesUsingEncoding:NSUTF8StringEncoding],
+															  (uint32_t)[password lengthOfBytesUsingEncoding:NSUTF8StringEncoding],
 															  [password UTF8String],
 															  NULL,
 															  accessRef,
@@ -249,7 +249,7 @@ void setGenericSecretsForFilesystem(NSDictionary* secretsDictionary, MFFilesyste
 		// Modify
 		OSErr result = SecKeychainItemModifyContent(itemRef,
 													NULL,
-													[secretsData length],
+													(uint32_t)[secretsData length],
 													[secretsData bytes]);
 		if (result == noErr) {
 			// MFLogSO(self, fs, @"Generic keychain data updated succesfully fs %@", fs);
@@ -268,9 +268,9 @@ void setGenericSecretsForFilesystem(NSDictionary* secretsDictionary, MFFilesyste
 		}
 		
 		SecKeychainAttribute attrs[] = {
-			{ kSecLabelItemAttr, [serviceName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char*)[serviceName UTF8String] },
-			{ kSecAccountItemAttr, [fs.uuid lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char*)[fs.uuid UTF8String] },
-			{ kSecServiceItemAttr, [serviceName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char*)[serviceName UTF8String] }
+			{ kSecLabelItemAttr, (uint32_t)[serviceName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char*)[serviceName UTF8String] },
+			{ kSecAccountItemAttr, (uint32_t)[fs.uuid lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char*)[fs.uuid UTF8String] },
+			{ kSecServiceItemAttr, (uint32_t)[serviceName lengthOfBytesUsingEncoding: NSUTF8StringEncoding], (char*)[serviceName UTF8String] }
 		};
 		
 		SecKeychainAttributeList attributes = {
@@ -279,7 +279,7 @@ void setGenericSecretsForFilesystem(NSDictionary* secretsDictionary, MFFilesyste
 		
 		OSErr result = SecKeychainItemCreateFromContent(itemClass,
 														&attributes,
-														[secretsData length],
+														(uint32_t)[secretsData length],
 														[secretsData bytes],
 														NULL,
 														accessRef,
