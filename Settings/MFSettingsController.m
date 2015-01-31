@@ -286,15 +286,16 @@
 		NSString *fsWord = [_filesystemsToDeleteBuffer count] == 1 ? @"filesystem" : @"filesystems";
 		NSString *messageText = [NSString stringWithFormat: @"Are you sure you want to delete the %@ %@?", fsWord,
 								 [[_filesystemsToDeleteBuffer valueForKey: kMFFSNameParameter] componentsJoinedByString: @", "]];
+
 		NSAlert *deleteConfirmation = [NSAlert new];
 		[deleteConfirmation setMessageText: messageText];
-		[deleteConfirmation addButtonWithTitle:@"OK"];
 		[deleteConfirmation setInformativeText: @"This action can not be undone."];
-		NSButton *cancelButton = [deleteConfirmation addButtonWithTitle:@"Cancel"];
-		[cancelButton setKeyEquivalent:@"\e"];
+		[deleteConfirmation addButtonWithTitle:@"Delete"];
+		[[deleteConfirmation addButtonWithTitle:@"Cancel"] setKeyEquivalent:@"\e"];
 		[deleteConfirmation setAlertStyle: NSCriticalAlertStyle];
 		[deleteConfirmation beginSheetModalForWindow: [filesystemTableView window] completionHandler:^(NSModalResponse returnCode) {
 			if (returnCode == NSAlertSecondButtonReturn) {
+				// Cancel; do nothing
 				
 			} else if (returnCode == NSAlertFirstButtonReturn) {
 				for(MFClientFS *fs in _filesystemsToDeleteBuffer) {
