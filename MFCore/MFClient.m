@@ -75,9 +75,6 @@ static MFClient *sharedClient = nil;
 }
 
 - (void)registerForGeneralNotifications {
-	NSDistributedNotificationCenter *dnc = [NSDistributedNotificationCenter defaultCenter];
-	[dnc addObserver:self selector:@selector(handleRecentsUpdatedNotification:) name:kMFRecentsUpdatedNotification object:kMFDNCObject];
-	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleApplicationTerminatingNotification:) name:NSApplicationWillTerminateNotification object:nil];
 }

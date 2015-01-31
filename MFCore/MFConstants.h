@@ -25,7 +25,6 @@
 #define kMFStatusChangedNotification @"org.mgorbach.macfusion.notifications.statusChanged"
 #define kMFFilesystemAddedNotification @"org.mgorbach.macfusion.notifications.fsAdded"
 #define kMFFilesystemRemovedNotification @"org.mgorbach.macfusion.notifications.fsRemoved"
-#define kMFRecentsUpdatedNotification @"org.mgorbach.macfusion.notifications.recentsUpdated"
 
 // Client Notifications (Non-distributed)
 #define kMFClientFSMountedNotification @"org.mgorbach.macfusion.mfclient.fsMounted"
