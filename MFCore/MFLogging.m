@@ -147,7 +147,7 @@ static MFLogging *sharedLogging = nil;
 
 NSDictionary *dictFromASLMessage(aslmsg m) {
 	NSMutableDictionary *messageDict = [NSMutableDictionary dictionary];
-	NSInteger i;
+	uint32_t i;
 	const char *key;
 	const char *val;
 	for (i = 0; (NULL != (key = asl_key(m, i))); i++) {
