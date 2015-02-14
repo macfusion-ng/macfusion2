@@ -45,5 +45,5 @@ Current fixes
 [MacFUSE]:http://code.google.com/p/macfuse/
 [Fuse for OSX]:http://osxfuse.github.com
 [XQuartz]:http://xquartz.macosforge.org
-[build of the development version]:http://yoshikee.tumblr.com/post/39202253046/eldeveloper-macfusion
+[build of the development version]:https://github.com/ElDeveloper/macfusion2/releases/tag/2.1-dev
 [@yosmark]:https://twitter.com/yosmark
