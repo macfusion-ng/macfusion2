@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSMinimumSystemVersion</key>
-	<string>10.6.0</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
@@ -27,35 +25,37 @@
 			<string>Binary</string>
 		</dict>
 	</array>
-	<key>CFBundleShortVersionString</key>
-	<string>2.0.5-dev</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>macfusionIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.mgorbach.macfusion2</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>SUFeedURL</key>
-	<string>http://macfusionapp.org/appcast.xml</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>macfusion_dsa_pub.pem</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.0.5-dev</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>SUCheckForUpdates</key>
-	<true/>
 	<key>CFBundleVersion</key>
 	<string>2.0.5-dev</string>
-	<key>NSMainNibFile</key>
-	<string>main</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
 	<key>GitSHA</key>
 	<string></string>
 	<key>GitStatus</key>
 	<string></string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.6.0</string>
+	<key>NSMainNibFile</key>
+	<string>main</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>SUCheckForUpdates</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>http://macfusionapp.org/appcast.xml</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>macfusion_dsa_pub.pem</string>
 </dict>
 </plist>
