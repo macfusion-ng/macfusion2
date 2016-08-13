@@ -223,7 +223,7 @@ static CGColorRef CGColorCreateFromNSColor(CGColorSpaceRef  colorSpace, NSColor 
 - (NSImage*)coloredImage {
 	CGFloat tint_alpha = 0.3;
 	
-	CGImageSourceRef imageSource = CGImageSourceCreateWithURL( (CFURLRef)[NSURL fileURLWithPath: self.imagePath], NULL );
+	CGImageSourceRef imageSource = CGImageSourceCreateWithURL( (__bridge CFURLRef)[NSURL fileURLWithPath: self.imagePath], NULL );
 	CGImageRef cgImageOriginalRep = CGImageSourceCreateImageAtIndex( imageSource, 0, NULL );
 	NSSize oldSize = NSMakeSize( CGImageGetWidth(cgImageOriginalRep), CGImageGetHeight(cgImageOriginalRep) );
 	CGRect fullContext = CGRectMake( 0, 0, oldSize.width, oldSize.height );

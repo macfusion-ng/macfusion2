@@ -96,7 +96,7 @@
 									 otherButton:@""
 					   informativeTextWithFormat:@"No error was given"];
 		[alert setAlertStyle:NSCriticalAlertStyle];
-		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:self];
+		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(self)];
 	}
 }
 

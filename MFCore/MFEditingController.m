@@ -42,7 +42,7 @@
 		   modalForWindow:parentWindow
 			modalDelegate:editController 
 		   didEndSelector:@selector(editSheetDidEnd:returnCode:contextInfo:)
-			  contextInfo:fs];
+			  contextInfo:(__bridge void *)(fs)];
 		NSInteger editReturn = [NSApp runModalForWindow: editWindow];
 		[NSApp endSheet:editWindow];
 		[editWindow orderOut:self];

@@ -59,6 +59,6 @@
 - (NSImage *)coloredImage;
 
 @property(readwrite, assign) NSInteger displayOrder;
-@property(readwrite, retain) id<MFClientFSDelegateProtocol> clientFSDelegate; 
+@property(readwrite, strong) id<MFClientFSDelegateProtocol> clientFSDelegate; 
 @property(readonly) NSImage *iconImage;
 @end

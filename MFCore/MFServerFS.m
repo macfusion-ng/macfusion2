@@ -20,10 +20,8 @@
 #import "MFError.h"
 #import "MFLogging.h"
 #import "MFPreferences.h"
-#import "MGUtilities.h"
+
 #import <sys/xattr.h>
-#import <AppKit/AppKit.h>
-#import "NSString+CarbonFSRefCreation.h"
 
 #define FS_DIR_PATH @"~/Library/Application Support/Macfusion/Filesystems"
 
@@ -40,9 +38,6 @@
 - (NSError *)genericError;
 - (void)setError:(NSError*)error;
 - (NSTimer *)newTimeoutTimer;
-
-- (void)addFileSystemToFinderSidebar;
-- (void)removeFileSystemFromFinderSidebar;
 @end
 
 @implementation MFServerFS
@@ -193,7 +188,7 @@
 	CFUUIDRef uuidObject = CFUUIDCreate(NULL);
     CFStringRef uuidCFString = CFUUIDCreateString(NULL, uuidObject);
     CFRelease(uuidObject);
-	return [NSMakeCollectable(uuidCFString) autorelease];
+	return (__bridge_transfer NSString *)(uuidCFString);
 }
 
 
@@ -204,7 +199,6 @@
 	[defaultParameterDictionary addEntriesFromDictionary:delegateDict];
 	[defaultParameterDictionary setObject:[NSNumber numberWithBool:NO] forKey:kMFFSNegativeVNodeCacheParameter];
 	[defaultParameterDictionary setObject:[NSNumber numberWithBool:NO] forKey:kMFFSNoAppleDoubleParameter];
-	[defaultParameterDictionary setObject:[NSNumber numberWithBool:NO] forKey:kMFFSShowInFinderSidebar];
 	
 	return [defaultParameterDictionary copy];
 }
@@ -259,6 +253,7 @@
 			if ([[self.parameters objectForKey:kMFFSNoAppleDoubleParameter] boolValue]) {
 				[taskArguments addObject:@"-onoappledouble"];
 			}
+			
 			if ([[self.parameters objectForKey:kMFFSNegativeVNodeCacheParameter] boolValue]) {
 				[taskArguments addObject:@"-onegative_vncache"];
 			}
@@ -311,7 +306,7 @@
 # pragma mark Mounting mechanics
 - (BOOL)setupMountPoint {
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSString *mountPath = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
+	NSString *mountPath = [self mountPath];
 	BOOL pathExists, isDir, returnValue;
 	NSString *errorDescription;
 	
@@ -354,7 +349,7 @@
 
 - (void)removeMountPoint {
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSString *mountPath = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
+	NSString *mountPath = [self mountPath];
 	BOOL pathExists, isDir;
 	
 	removexattr([mountPath cStringUsingEncoding:NSUTF8StringEncoding],[@"org.mgorbach.macfusion.xattr.uuid" cStringUsingEncoding:NSUTF8StringEncoding],0);
@@ -366,9 +361,7 @@
 }
 
 - (void)mount {
-	[super mount];
-
-	if (self.status == kMFStatusFSMounted) {
+	if ([self.status  isEqual: kMFStatusFSMounted]) {
 		return;
 	}
 	
@@ -381,12 +374,6 @@
 		[_timer invalidate];
 		_timer = [self newTimeoutTimer];
 		[_task launch];
-
-		// Check if it's desired to add the filesystem to the sidebar
-		if ([[self.parameters objectForKey:kMFFSShowInFinderSidebar] boolValue]) {
-			[self addFileSystemToFinderSidebar];
-		}
-
 		MFLogS(self, @"Task launched OK");
 	} else {
 		MFLogS(self, @"Mount point could not be created");
@@ -395,21 +382,14 @@
 }
 
 - (void)unmount {
-	[super unmount];
-
 	MFLogS(self, @"Unmounting");
-	NSString *path = [[[self mountPath] stringByExpandingTildeInPath] stringByStandardizingPath];
-	NSString *taskPath = @"/usr/sbin/diskutil";
-	NSMutableArray *taskArguments = [NSMutableArray array];
-	NSTask* unmountTask = [[NSTask alloc] init];
-
-	[taskArguments addObject:@"unmount"];
-	[taskArguments addObject:path];
-
-	[unmountTask setLaunchPath:taskPath];
-	[unmountTask setArguments:taskArguments];
-	[unmountTask launch];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTaskDidTerminate:) name:NSTaskDidTerminateNotification object:unmountTask];
+	NSString* path = [[self mountPath] stringByStandardizingPath];
+	NSString *taskPath = @"/sbin/umount";
+	NSTask* t = [[NSTask alloc] init];
+	[t setLaunchPath:taskPath];
+	[t setArguments:[NSArray arrayWithObject:path]];
+	[t launch];
+	
 	/*
 	[t waitUntilExit];
 	if ([t terminationStatus] != 0)
@@ -418,66 +398,6 @@
 		[t terminationStatus]);
 	}
 	 */
-}
-
-- (void)addFileSystemToFinderSidebar{
-	// Create a reference to the shared favorite's file list 
-	LSSharedFileListRef favoritesFileList = LSSharedFileListCreate(NULL, kLSSharedFileListFavoriteItems, NULL);
-
-	CFURLRef itemURL = (CFURLRef)[NSURL fileURLWithPath:[[self mountPath] stringByExpandingTildeInPath]];
-	CFStringRef itemName=(CFStringRef)[self name];
-	IconRef itemIcon=NULL;
-	LSSharedFileListItemRef item=NULL;
-	FSRef fileReference;
-	SInt16 label;
-
-	[[self iconPath] getFSRef:&fileReference createFileIfNecessary:NO];
-
-	if (favoritesFileList) {
-		// Insert an item to the list
-		if (GetIconRefFromFileInfo(&fileReference, 0, NULL, kFSCatInfoNone, NULL, kIconServicesUpdateIfNeededFlag, &itemIcon, &label) == noErr){
-			MFLogS(self, @"Icon reference cerated successfully: %@", [self iconPath]);
-		}
-
-		item=LSSharedFileListInsertItemURL(favoritesFileList, kLSSharedFileListItemLast, itemName, itemIcon, itemURL, NULL, NULL);
-		if (item){
-			CFRelease(item);
-		}
-		if (itemIcon) {
-			ReleaseIconRef(itemIcon);
-		}
-	}
-	else{
-		return;
-	}
-
-	CFRelease(favoritesFileList);
-}
-
-- (void)removeFileSystemFromFinderSidebar{
-	LSSharedFileListRef favoritesFileList=LSSharedFileListCreate(NULL, kLSSharedFileListFavoriteItems, NULL);
-	UInt32 seed;
-	CFArrayRef favoritesFileListItems=LSSharedFileListCopySnapshot(favoritesFileList, &seed);
-	LSSharedFileListItemRef itemReference;
-	CFStringRef	itemName;
-
-	// go through the list of favorites searching for the current item
-	for (id item in (NSArray *)favoritesFileListItems ) {
-		itemReference=(LSSharedFileListItemRef)item;
-		itemName=LSSharedFileListItemCopyDisplayName(itemReference);
-
-		if (itemName) {
-			//When found proceed to delete it
-			if ([(NSString *)itemName isEqualToString:[self name]]) {
-				MFLogS(self, @"Deleting an item named %@", (NSString *)itemName);
-				LSSharedFileListItemRemove(favoritesFileList, itemReference);
-			}
-			CFRelease(itemName);
-		}
-	}
-
-	CFRelease(favoritesFileList);
-	CFRelease(favoritesFileListItems);
 }
 
 # pragma mark Validation
@@ -538,13 +458,13 @@
 	[_timer invalidate];
 }
 
-- (void)handleTaskDidTerminate:(NSTask *)task {
-	if (self.status == kMFStatusFSMounted) {
+- (void)handleTaskDidTerminate:(NSNotification *)note {
+	if ([self.status  isEqual: kMFStatusFSMounted]) {
 		// We are terminating after a mount has been successful
 		// This may not quite be normal (may be for example a bad net connection)
 		// But we'll set status to unmounted anyway
 		self.status = kMFStatusFSUnmounted;
-	} else if (self.status == kMFStatusFSWaiting) {
+	} else if ([self.status  isEqual: kMFStatusFSWaiting]) {
 		// We terminated while trying to mount
 		NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
 									self.uuid, kMFErrorFilesystemKey,
@@ -584,27 +504,12 @@
                        context:(void *)context {
 	//MFLogS(self, @"Observes notification keypath %@ object %@, change %@",
 	//	   keyPath, object, change);
-
-
-	// Since mount points and side-bar items are created when the user press
-	// the 'mount' button, they must be removed on the following circumstances:
-	//		- requested unmount
-	//		- failure while mounting the FS
-	//
-	// remember that the visibility in the sidebar is optional hence the check
+	
 	if ([keyPath isEqualToString:kMFSTStatusKey ] && object == self && [[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:kMFStatusFSUnmounted]) {
-		if ([[self.parameters objectForKey:kMFFSShowInFinderSidebar] boolValue]) {
-			[self removeFileSystemFromFinderSidebar];
-		}
-
 		[self removeMountPoint];
 	}
 	
 	if ([keyPath isEqualToString:kMFSTStatusKey ] && object == self && [[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:kMFStatusFSFailed]) {
-		if ([[self.parameters objectForKey:kMFFSShowInFinderSidebar] boolValue]) {
-			[self removeFileSystemFromFinderSidebar];
-		}
-
 		[self removeMountPoint];
 	}
 	

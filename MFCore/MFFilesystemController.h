@@ -47,7 +47,7 @@
 
 // Accessors
 - (NSDictionary *)filesystemsDictionary;
-@property(readonly, retain) NSMutableArray *filesystems;
-@property(readonly, retain) NSMutableArray *recents;
+@property(readonly, strong) NSMutableArray *filesystems;
+@property(readonly, strong) NSMutableArray *recents;
 @end
 

@@ -23,6 +23,7 @@
 #import "MFLogging.h"
 #import "MFConstants.h"
 #import "MFCore.h"
+#import "MFServerFS.h"
 
 #include <sys/xattr.h>
 @implementation MFMainController

@@ -45,7 +45,11 @@
 }
 
 - (void)awakeFromNib {
-	[self addObserver:self forKeyPath:@"fs.imagePath" options:NSKeyValueObservingOptionNew context:self];
+	[self addObserver:self forKeyPath:@"fs.imagePath" options:NSKeyValueObservingOptionNew context:(__bridge void *)(self)];
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"fs.imagePath" ];
 }
 
 - (void)drawRect:(NSRect)rect {
@@ -179,7 +183,7 @@
 
 # pragma mark KVO
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (context == self) {
+    if (context == (__bridge void *)(self)) {
 		[self recalcImages];
 	} else {
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

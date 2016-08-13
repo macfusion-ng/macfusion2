@@ -24,6 +24,7 @@
 #import "MFLogReader.h"
 #import "MFLogging.h"
 #import "MFSecurity.h"
+#import "MFServerPlugin.h"
 
 #define ORDERING_FILE_PATH @"~/Library/Application Support/Macfusion/Ordering.plist"
 
@@ -49,7 +50,7 @@ static MFClient *sharedClient = nil;
 #pragma mark Singleton methods
 + (MFClient *)sharedClient {
 	if (sharedClient == nil) {
-		[[self alloc] init];
+		sharedClient = [[self alloc] init];
 	}
 	
 	return sharedClient;
@@ -278,7 +279,7 @@ static MFClient *sharedClient = nil;
 OSStatus myKeychainCallback ( SecKeychainEvent keychainEvent,
 							 SecKeychainCallbackInfo *info,
 							 void *context ) {
-	MFClient *self = (MFClient *)context;
+	MFClient *self = (__bridge MFClient *)context;
 	// MFLogS(self, @"Keychain callback received event is %d", keychainEvent);
 	SecKeychainItemRef itemRef = info -> item;
 	NSString *uuid = mfsecUUIDForKeychainItemRef(itemRef);
@@ -292,7 +293,7 @@ OSStatus myKeychainCallback ( SecKeychainEvent keychainEvent,
 
 - (void)setupKeychainMonitoring {
 	SecKeychainEventMask eventMask = kSecUpdateEventMask | kSecAddEventMask;
-	SecKeychainAddCallback(myKeychainCallback , eventMask, self);
+	SecKeychainAddCallback(myKeychainCallback , eventMask, (__bridge void *)(self));
 }
 
 #pragma mark Logging

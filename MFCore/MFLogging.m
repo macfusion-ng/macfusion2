@@ -20,6 +20,7 @@
 #import "MFServerProtocol.h"
 #import "MFConstants.h"
 #import "MFClient.h"
+#import "MFServerFS.h"
 
 #define LOG_FILE_PATH @"~/Library/Logs/MacFusion2.log"
 
@@ -108,7 +109,7 @@ static MFLogging *sharedLogging = nil;
 
 + (MFLogging *)sharedLogging {
 	if (sharedLogging == nil) {
-		[[self alloc] init];
+		sharedLogging = [[self alloc] init];
 	}
 	
 	return sharedLogging;
@@ -238,10 +239,9 @@ NSString *headerStringForASLMessageDict(NSDictionary *messageDict) {
 	stdOut = b;
 }
 
-- (void)finalize {
+- (void)dealloc {
 	asl_close(aslClient);
 	close(fd);
-	[super finalize];
 }
 
 @synthesize delegate;

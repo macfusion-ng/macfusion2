@@ -25,5 +25,5 @@
 	BOOL _dragHighlight;
 }
 
-@property(readwrite, retain) MFClientFS *fs;
+@property(readwrite, strong) MFClientFS *fs;
 @end

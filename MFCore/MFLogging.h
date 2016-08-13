@@ -57,5 +57,5 @@ void MFLogSO(id sender, id object, NSString* format, ...);
 NSDictionary *dictFromASLMessage(aslmsg m);
 NSString *headerStringForASLMessageDict(NSDictionary *dict);
 
-@property(retain, readwrite) id delegate;
+@property(strong, readwrite) id delegate;
 @end

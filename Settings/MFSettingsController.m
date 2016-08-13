@@ -29,6 +29,7 @@
 #import "MFEditingController.h"
 #import "MFPreferences.h"
 #import "MFLogging.h"
+#import "MGActionButton.h"
 
 @interface MFSettingsController(PrivateAPI)
 - (void)editFilesystem:(MFClientFS*)fs;
@@ -45,15 +46,8 @@
 		[NSApp setDelegate: self];
 		client = [MFClient sharedClient];
 		[client setDelegate: self];
-        _filesystemsToDeleteBuffer=[[NSMutableArray alloc] init];
 	}
 	return self;
-}
-
--(void)dealloc{
-    [_filesystemsToDeleteBuffer release];
-    
-    [super dealloc];
 }
 
 # pragma mark Agent connection
@@ -74,7 +68,7 @@
 		[NSApp terminate: self];
 	} else if (returnCode == NSAlertFirstButtonReturn) {
 		mfcLaunchAgent();
-		[[NSRunLoop currentRunLoop] runUntilDate:[[NSDate date] addTimeInterval: 3]];
+		[[NSRunLoop currentRunLoop] runUntilDate:[[NSDate date] dateByAddingTimeInterval: 3]];
 		
 		if ([client establishCommunication]) {
 			[client fillInitialStatus];
@@ -112,7 +106,7 @@
 		if (agentRunning) {
 			// Agent is running. Wait a bit for it to set up IPC
 			MFLogS(self, @"Waiting for agent");
-			NSDate* stopDate = [[NSDate date] addTimeInterval: 5.0];
+			NSDate* stopDate = [[NSDate date] dateByAddingTimeInterval: 5.0];
 			[[NSRunLoop currentRunLoop] runUntilDate: stopDate];
 			if ([client establishCommunication]) {
 				[client fillInitialStatus];
@@ -152,7 +146,7 @@
 	[tableViewMenu addItemWithTitle:@"Unmount" action:@selector(unmount) keyEquivalent:@""];
 	[tableViewMenu addItemWithTitle:@"Edit" action:@selector(editSelectedFilesystem:) keyEquivalent:@""];
 	
-	[[MFPreferences sharedPreferences] addObserver:self forKeyPath:kMFPrefsAutosize options:0 context:self];
+	[[MFPreferences sharedPreferences] addObserver:self forKeyPath:kMFPrefsAutosize options:0 context:(__bridge void *)(self)];
 	[filesystemTableView setIntercellSpacing: NSMakeSize(10, 0)];
 	
 	NSWindow *window = [filesystemTableView window];
@@ -211,7 +205,7 @@
 	[[client.filesystems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self.status == %@", kMFStatusFSMounted]] 
 	 makeObjectsPerformSelector:@selector(setClientFSDelegate:) withObject:self];
 	
-	[filesystemArrayController addObserver:self forKeyPath:@"arrangedObjects" options:NSKeyValueObservingOptionNew context:self];
+	[filesystemArrayController addObserver:self forKeyPath:@"arrangedObjects" options:NSKeyValueObservingOptionNew context:(__bridge void *)(self)];
 	[self resizeWindowForContent];
 	[newFSActionButton setMenu:[self newFilesystemMenu]];
 }
@@ -237,23 +231,6 @@
 			[client deleteFilesystem: fs];
 		}
 	}
-}
-
-- (IBAction)showAboutWindow:(id)sender{
-	NSURL *url = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"Contents/Info.plist"];
-	NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:url];
-	NSString *hash = [dictionary objectForKey:@"GitSHA"];
-	NSString *status = [dictionary objectForKey:@"GitStatus"];
-	NSDictionary *options;
-	NSString *gitinfo;
-
-	// add a star at the end of the SHA if the status is dirty else just the SHA
-	gitinfo=[NSString stringWithFormat:@"%@%@", hash, ([status isEqualToString:@"clean"] ? @"" : @" *")];
-
-	// version right now will be the current git SHA and status
-	options = [NSDictionary dictionaryWithObjectsAndKeys:gitinfo,@"Version",nil];
-
-	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:options];
 }
 
 - (IBAction)showPreferences:(id)sender {
@@ -310,19 +287,18 @@
 
 
 - (void)deleteFilesystems:(NSArray *)filesystems {
-    [_filesystemsToDeleteBuffer addObjectsFromArray:filesystems];
-    
+	NSMutableArray *filesystemsToDelete = [filesystems mutableCopy];
 	for(MFClientFS *fs in filesystems) {
 		if(!([fs isUnmounted] || [fs isFailedToMount])) {
-			[_filesystemsToDeleteBuffer removeObject: fs];
+			[filesystemsToDelete removeObject: fs];
 			MFLogS(self, @"Can't delete filesystem %@", fs);
 		}
 	}
 
-	if ([_filesystemsToDeleteBuffer count] > 0) {
-		NSString *fsWord = [_filesystemsToDeleteBuffer count] == 1 ? @"filesystem" : @"filesystems";
+	if ([filesystemsToDelete count] > 0) {
+		NSString *fsWord = [filesystemsToDelete count] == 1 ? @"filesystem" : @"filesystems";
 		NSString *messageText = [NSString stringWithFormat: @"Are you sure you want to delete the %@ %@?", fsWord,
-								 [[_filesystemsToDeleteBuffer valueForKey: kMFFSNameParameter] componentsJoinedByString: @", "]];
+								 [[filesystemsToDelete valueForKey: kMFFSNameParameter] componentsJoinedByString: @", "]];
 		NSAlert *deleteConfirmation = [NSAlert new];
 		[deleteConfirmation setMessageText: messageText];
 		[deleteConfirmation addButtonWithTitle:@"OK"];
@@ -330,15 +306,15 @@
 		NSButton *cancelButton = [deleteConfirmation addButtonWithTitle:@"Cancel"];
 		[cancelButton setKeyEquivalent:@"\e"];
 		[deleteConfirmation setAlertStyle: NSCriticalAlertStyle];
-		[deleteConfirmation beginSheetModalForWindow:[filesystemTableView window]
+		[deleteConfirmation beginSheetModalForWindow: [filesystemTableView window]
 									   modalDelegate:self
 									  didEndSelector:@selector(deleteConfirmationAlertDidEnd:returnCode:contextInfo:)
-										 contextInfo:nil];
+										 contextInfo:(__bridge void *)(filesystemsToDelete)];
 	}
 }
 
 - (void)deleteFilesystem:(MFClientFS *)fs {
-	[self deleteFilesystems: [NSArray arrayWithObject:fs]];
+	[self deleteFilesystems: [NSArray arrayWithObject: fs]];
 }
 	
 
@@ -391,13 +367,12 @@
 
 
 - (void)deleteConfirmationAlertDidEnd:(NSAlert*)alert returnCode:(NSInteger)code contextInfo:(void *)context {
+	NSArray *filesystemsToDelete = (__bridge NSArray *)context;
 	if (code == NSAlertSecondButtonReturn) {
-        MFLogS(self, @"Deletions canceled");
-	}
-    else if (code == NSAlertFirstButtonReturn) {
-		for(MFClientFS *fs in _filesystemsToDeleteBuffer) {
-			[client deleteFilesystem:fs];
-            [_filesystemsToDeleteBuffer removeObject:fs];
+		
+	} else if (code == NSAlertFirstButtonReturn) {
+		for(MFClientFS *fs in filesystemsToDelete) {
+			[client deleteFilesystem: fs];	
 		}
 	}
 }
@@ -420,10 +395,9 @@
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (context == self) {
+    if (context == (__bridge void *)(self)) {
 		[self resizeWindowForContent];
-	}
-    else {
+	} else {
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 	}
 }
@@ -432,8 +406,7 @@
 	if ([error code] == kMFErrorCodeMountFaliure) {
 		NSString* newDescription = [NSString stringWithFormat: @"Could not mount filesystem: %@", [error localizedDescription]];
 		return [MFError errorWithErrorCode:kMFErrorCodeMountFaliure description:newDescription];
-	}
-    else {
+	} else {
 		return error;
 	}
 }
@@ -443,8 +416,7 @@
 	if ([[filename stringByDeletingLastPathComponent] isEqualToString:fsLocation]) {
 		NSString *uuid = [[filename lastPathComponent] stringByDeletingPathExtension];
 		[self editFilesystem:[client filesystemWithUUID:uuid]];
-	}
-    else {
+	} else {
 		MFLogS(self, @"Not opening file. It is in the wrong place");
 	}
 		
@@ -607,11 +579,9 @@
 	mfcKaboomMacfusion();
 }
 
-- (void)finalize {
-	[super finalize];
+- (void)dealloc {
 	[client setDelegate:nil];
 }
 
 @synthesize client;
-@synthesize filesystemsToDeleteBuffer = _filesystemsToDeleteBuffer;
 @end

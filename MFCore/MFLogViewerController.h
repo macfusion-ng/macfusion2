@@ -38,7 +38,7 @@
 
 
 @property(readonly) NSPredicate *fullLogPredicate;
-@property(readwrite, retain) NSPredicate *filterPredicate;
-@property(readwrite, retain) NSPredicate *searchPredicate;
+@property(readwrite, strong) NSPredicate *filterPredicate;
+@property(readwrite, strong) NSPredicate *searchPredicate;
 
 @end

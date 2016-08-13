@@ -27,6 +27,11 @@
 
 #define kSSHFSCompressionParameter @"compression"
 #define kSSHFSFollowSymlinksParameter @"followSymlinks"
+#define kSSHFSAutoCacheParameter @"autoCache"
+#define kSSHFSDeferPermissionsParameter @"deferPermissions"
+#define kSSHFSFuseDebugParameter @"fuseDebug"
+#define kSSHFSSshfsDebugParameter @"sshfsDebug"
+#define kSSHFSSshDebugParameter @"sshDebug"
 
 static NSString *primaryViewControllerKey = @"sshfsPrimaryView";
 static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
@@ -39,16 +44,7 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 }
 
 - (NSString *)executablePath {
-    NSMutableString *binaryName=[[NSMutableString alloc] initWithString:@"sshfs-static"];
-
-	// The support for the NSAppKitVersionNumber is not consistent in 10.6
-	// Snow Leopard, so you cannot rely on it, therefore use the double value
-	// that identifies 10.7 Lion as NSAppKitVersionNumber10_7
-    if ( NSAppKitVersionNumber >= 1138 ) {
-        [binaryName appendString:@"-lions"];
-    }
-    
-	return [[NSBundle bundleForClass:[self class]] pathForResource:binaryName ofType:nil inDirectory:nil];
+	return [[NSBundle bundleForClass:[self class]] pathForResource:@"sshfs-static" ofType:nil inDirectory:nil];
 }
 
 - (NSArray *)secretsClientsList {
@@ -64,21 +60,33 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 						   [parameters objectForKey:kNetFSHostParameter],
 						   [parameters objectForKey:kNetFSDirectoryParameter]]];
 	
-	[arguments addObject:[[[parameters objectForKey:kMFFSMountPathParameter] stringByExpandingTildeInPath] stringByStandardizingPath]];
+	[arguments addObject:[parameters objectForKey:kMFFSMountPathParameter]];
 	[arguments addObject:[NSString stringWithFormat:@"-p%@", [parameters objectForKey:kNetFSPortParameter]]];
-
-    [arguments addObject:@"-odefer_permissions"];
-    [arguments addObject:@"-oauto_cache"];
-	[arguments addObject:@"-oCheckHostIP=no"];
-	[arguments addObject:@"-oStrictHostKeyChecking=no"];
 	[arguments addObject:@"-oNumberOfPasswordPrompts=1"];
+	
+	if ([[parameters objectForKey:kSSHFSCompressionParameter] boolValue] == YES) {
+		[arguments addObject:@"-ocompression=yes"];
+	}
 	if ([[parameters objectForKey:kSSHFSFollowSymlinksParameter] boolValue] == YES) {
 		[arguments addObject:@"-ofollow_symlinks"];	
 	}
-	
-	[arguments addObject:[NSString stringWithFormat:@"-ovolname=%@", [parameters objectForKey:kMFFSVolumeNameParameter]]];
+	if ([[parameters objectForKey:kSSHFSDeferPermissionsParameter] boolValue] == YES) {
+        [arguments addObject:@"-odefer_permissions"];
+    }
+	if ([[parameters objectForKey:kSSHFSAutoCacheParameter] boolValue] == YES) {
+        [arguments addObject:@"-oauto_cache"];
+    }
+	if ([[parameters objectForKey:kSSHFSSshfsDebugParameter] boolValue] == YES) {
+        [arguments addObject:@"-osshfs_debug"];
+    }
+	if ([[parameters objectForKey:kSSHFSFuseDebugParameter] boolValue] == YES) {
+        [arguments addObject:@"-odebug"];
+    }
+	if ([[parameters objectForKey:kSSHFSSshDebugParameter] boolValue] == YES) {
 	[arguments addObject:@"-ologlevel=debug1"];
+    }
 	[arguments addObject:@"-f"];
+	[arguments addObject:[NSString stringWithFormat:@"-ovolname=%@", [parameters objectForKey:kMFFSVolumeNameParameter]]];
 	[arguments addObject:[NSString stringWithFormat:@"-ovolicon=%@", [parameters objectForKey:kMFFSVolumeIconPathParameter]]];
 	// MFLogS(self, @"Arguments are %@", arguments);
 	return [arguments copy];
@@ -123,7 +131,7 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 
 # pragma mark Parameters
 - (NSArray *)parameterList {
-	return [NSArray arrayWithObjects:kNetFSUserParameter,kNetFSHostParameter, kNetFSDirectoryParameter, kNetFSUserParameter,kNetFSPortParameter, kNetFSProtocolParameter, kSSHFSFollowSymlinksParameter,kSSHFSCompressionParameter, nil ];
+	return [NSArray arrayWithObjects:kNetFSUserParameter,kNetFSHostParameter, kNetFSDirectoryParameter, kNetFSUserParameter,kNetFSPortParameter, kNetFSProtocolParameter, kSSHFSFollowSymlinksParameter,kSSHFSCompressionParameter, kSSHFSDeferPermissionsParameter, kSSHFSAutoCacheParameter, kSSHFSFuseDebugParameter, kSSHFSSshfsDebugParameter, kSSHFSSshDebugParameter, nil ];
 }
 
 - (NSArray *)secretsList {
@@ -137,7 +145,12 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 						[NSNumber numberWithInt:22], kNetFSPortParameter,
 						[NSNumber numberWithInt:kSecProtocolTypeSSH], kNetFSProtocolParameter,
 						[NSNumber numberWithBool:YES], kSSHFSFollowSymlinksParameter,
-						[NSNumber numberWithBool:NO], kSSHFSCompressionParameter,
+						[NSNumber numberWithBool:YES], kSSHFSCompressionParameter,
+                        [NSNumber numberWithBool:YES], kSSHFSDeferPermissionsParameter,
+                        [NSNumber numberWithBool:YES], kSSHFSAutoCacheParameter,
+                        [NSNumber numberWithBool:NO], kSSHFSFuseDebugParameter,
+                        [NSNumber numberWithBool:NO], kSSHFSSshfsDebugParameter,
+                        [NSNumber numberWithBool:NO], kSSHFSSshDebugParameter,
 									   nil];
 	
 	return defaultParameters;

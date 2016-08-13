@@ -33,7 +33,7 @@
 		[self setDelegate:self];
 		[self setDataSource:self];
 		[[[self tableColumns] objectAtIndex:0] setDataCell:[MFLogViewerTableCell new]];
-		[self addObserver:self forKeyPath:@"logMessages" options:(NSKeyValueObservingOptions)0 context:self];
+		[self addObserver:self forKeyPath:@"logMessages" options:(NSKeyValueObservingOptions)0 context:(__bridge void *)(self)];
 	}
 	
 	return self;
@@ -62,7 +62,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (context == self) {
+    if (context == (__bridge void *)(self)) {
 		[self reloadData];
 		[self noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [self.logMessages count])]];
 	} else {

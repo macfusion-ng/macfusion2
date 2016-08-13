@@ -58,7 +58,7 @@ static NSString *kAutoscrollToolbarItemIdentifier = @"autoscroll";
 - (void)windowDidLoad {
 	[logTableView setIntercellSpacing:NSMakeSize(0, 0)];
 	[logTableView bind:@"logMessages" toObject:logArrayController withKeyPath:@"arrangedObjects" options:nil];
-	[logArrayController addObserver:self forKeyPath:@"arrangedObjects" options:(NSKeyValueObservingOptions)0 context:self];
+	[logArrayController addObserver:self forKeyPath:@"arrangedObjects" options:(NSKeyValueObservingOptions)0 context:(__bridge void *)(self)];
 	[logArrayController bind:@"filterPredicate" toObject:self withKeyPath:@"fullLogPredicate" options:nil];
 	
 	[logTableView scrollRowToVisible: [logTableView numberOfRows] - 1];
@@ -102,7 +102,7 @@ static NSString *kAutoscrollToolbarItemIdentifier = @"autoscroll";
 
 # pragma mark Updating
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (context == self) {
+    if (context == (__bridge void *)(self)) {
 		[logTableView reloadData];
 		if ([[MFPreferences sharedPreferences] getBoolForPreference: kMFPrefsAutoScrollLog]) {
 			[logTableView scrollRowToVisible:[logTableView numberOfRows] - 1];

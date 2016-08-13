@@ -56,6 +56,7 @@ NSDictionary *getGenericSecretsForFilesystemAndReturnItem(MFFilesystem *fs, SecK
 			return loadedDataDict;
 		} else {
 			// MFLogS(self, @"Failed to parse data in generic entry. data: %@", loadedDataDict);
+			SecKeychainItemFreeContent(NULL, passwordData);
 			return nil;
 		}
 	} else {
@@ -134,11 +135,11 @@ SecAccessRef keychainAccessRefForFilesystem(MFFilesystem* fs) {
 		if (error != noErr) {
 			// MFLogSO(self, fs, @"Could not create trusted ref for path %@ fs %@ error %d", path, fs, error);
 		} else {
-			[trustRefs addObject: (id)trustedAppRef];
+			[trustRefs addObject: (__bridge id)trustedAppRef];
 		}
 	}
 	
-	error = SecAccessCreate((CFStringRef)serviceNameForFS( fs ), (CFArrayRef)[trustRefs copy], &accessRef);
+	error = SecAccessCreate((__bridge CFStringRef)serviceNameForFS( fs ), (__bridge CFArrayRef)[trustRefs copy], &accessRef);
 	if (error != noErr) {
 		// MFLogSO(self, fs, @"Failed to create access ref for fs %@ error %d", fs, error);
 		return NULL;
@@ -352,11 +353,11 @@ SInt32 showDialogForPasswordQuery(MFFilesystem* fs, BOOL* savePassword, NSString
 	
 	const void* keychainValues[] = {
 		@"Password Needed",
-		dialogText,
+		(__bridge const void *)(dialogText),
 		@"Password",
 		@"Save Password in Keychain",
 		@"Cancel",
-		iconURL
+		(__bridge const void *)(iconURL)
 	};
 	
 	SInt32 error;
@@ -382,10 +383,10 @@ SInt32 showDialogForPasswordQuery(MFFilesystem* fs, BOOL* savePassword, NSString
 	}
 	
 	CFRelease(dialogTemplate);
-	CFRelease(passwordDialog);
 	int button = responseFlags & 0x3;
 	if (button == kCFUserNotificationAlternateResponse) {
 		// MFLogSO(self, fs, @"Exiting due to cancel on UI fs %@", fs);
+        CFRelease(passwordDialog);
 		return 1;
 	}
 	
@@ -395,7 +396,9 @@ SInt32 showDialogForPasswordQuery(MFFilesystem* fs, BOOL* savePassword, NSString
 	// MFLogSO(self, fs, @"Save password is %d Flags %d fs %@", savePassword, responseFlags, fs);
 	CFStringRef passwordRef = CFUserNotificationGetResponseValue(passwordDialog,kCFUserNotificationTextFieldValuesKey,
 																 0);
-	*password = (NSString *)passwordRef;
+	*password = (__bridge NSString *)passwordRef;
+	CFRelease(passwordDialog);
+	
 	return 0;
 }
 
