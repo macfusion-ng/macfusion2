@@ -164,16 +164,22 @@
 - (void)registerGeneralNotifications {
 	[self addObserver:self 
 		   forKeyPath:KMFStatusDict
-			  options:NSKeyValueObservingOptionOld || NSKeyValueObservingOptionNew
+			  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
 			  context:nil];
 	[self addObserver:self
 		   forKeyPath:kMFParameterDict
-			  options:NSKeyValueObservingOptionOld || NSKeyValueObservingOptionNew
+			  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
 			  context:nil];
 	[self addObserver:self
 		   forKeyPath:kMFSTStatusKey
-			  options:NSKeyValueObservingOptionOld || NSKeyValueObservingOptionNew
+			  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
 			  context:nil];
+}
+
+- (void)dealloc {
+	[self removeObserver:self forKeyPath:KMFStatusDict];
+	[self removeObserver:self forKeyPath:kMFParameterDict];
+	[self removeObserver:self forKeyPath:kMFSTStatusKey];
 }
 
 - (NSMutableDictionary *)initializedStatusInfo {

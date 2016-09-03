@@ -48,6 +48,15 @@ static MFCommunicationServer *sharedServer = nil;
 	[[MFFilesystemController sharedController] addObserver:self forKeyPath:@"recents" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 }
 
+- (void)dealloc {
+	NSArray *filesystems = [[self filesystemController] filesystems];
+	NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [filesystems count])];
+
+	[filesystems removeObserver:self fromObjectsAtIndexes:indexes forKeyPath:@"status"];
+	[filesystems removeObserver:self fromObjectsAtIndexes:indexes forKeyPath:@"parameters"];
+
+}
+
 - (id) init {
 	self = [super init];
 	if (self != nil) {

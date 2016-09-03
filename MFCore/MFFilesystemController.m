@@ -281,6 +281,12 @@ static void diskUnMounted(DADiskRef disk, void *mySelf) {
 	}
 }
 
+- (void)dealloc {
+	for(MFServerFS *fs in _filesystems){
+		[self unregisterObservationOnFilesystem:fs];
+	}
+}
+
 # pragma mark Self-monitoring
 - (void)registerObservationOnFilesystem:(MFServerFS *)fs {
 	[fs addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
@@ -373,6 +379,7 @@ static void diskUnMounted(DADiskRef disk, void *mySelf) {
 	if ([_filesystems indexOfObject:fs] != NSNotFound) {
 		[[self mutableArrayValueForKey:@"filesystems"] removeObject: fs];
 	}
+	[self unregisterObservationOnFilesystem:fs];
 }
 
 - (MFServerFS *)filesystemWithUUID:(NSString *)uuid {

@@ -580,6 +580,7 @@
 }
 
 - (void)dealloc {
+	[[MFPreferences sharedPreferences] removeObserver:self forKeyPath:kMFPrefsAutosize context:(__bridge void *)(self)];
 	[client setDelegate:nil];
 }
 

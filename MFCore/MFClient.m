@@ -82,6 +82,14 @@ static MFClient *sharedClient = nil;
 	[nc addObserver:self selector:@selector(handleApplicationTerminatingNotification:) name:NSApplicationWillTerminateNotification object:nil];
 }
 
+- (void)dealloc{
+	NSDistributedNotificationCenter *dnc = [NSDistributedNotificationCenter defaultCenter];
+	[dnc removeObserver:self name:kMFRecentsUpdatedNotification object:kMFDNCObject];
+
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self name:NSApplicationWillTerminateNotification object:nil];
+}
+
 - (id)init {
 	self = [super init];
 	if (self != nil) {
