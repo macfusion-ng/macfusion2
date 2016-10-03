@@ -17,6 +17,6 @@
 
 @class MFClientFS;
 
-@protocol MFClientFSDelegateProtocol <NSObject>
+@protocol MFClientFSDelegateProtocol <NSFileManagerDelegate>
 - (void)filesystemDidChangeStatus:(MFClientFS *)fs;
 @end
