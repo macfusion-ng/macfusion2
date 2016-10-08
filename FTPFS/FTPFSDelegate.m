@@ -132,7 +132,7 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 	if ([parameterName isEqualToString:kMFFSMountPathParameter] && [parameters objectForKey:kNetFSHostParameter]) {
 		NSString *mountBathBase = [parameters objectForKey:kMFFSNameParameter] ? [parameters objectForKey:kMFFSNameParameter] : [parameters objectForKey:kNetFSHostParameter];
 		
-		NSString *mountPath = [NSString stringWithFormat:@"/Volumes/%@", mountBathBase];
+		NSString *mountPath = [NSString stringWithFormat:@"%@/Volumes/%@", NSHomeDirectory(), mountBathBase];
 		return mountPath;
 	}
 	
