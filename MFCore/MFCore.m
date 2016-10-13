@@ -72,11 +72,12 @@ NSArray *mfcSecretClientsForFileystem(MFFilesystem *fs) {
 BOOL mfcGetStateOfLoginItemWithPath(NSString *path) {
 	UInt32 seedValue;
 	LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-	NSArray  *loginItems = (__bridge NSArray *)(LSSharedFileListCopySnapshot(loginItemsRef, &seedValue));
+	CFArrayRef loginItems = LSSharedFileListCopySnapshot(loginItemsRef, &seedValue);
 	BOOL present = FALSE;
-	for(id loginItem in loginItems) {
+	CFIndex arrayCount = CFArrayGetCount(loginItems);
+	for(CFIndex i = 0; i < arrayCount; ++i) {
         CFURLRef urlRef;
-		LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)loginItem;
+		LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(loginItems, i);
 		LSSharedFileListItemResolve(itemRef, 0, &urlRef, NULL);
 		NSURL *theURL = (__bridge NSURL*) urlRef;
         present = [[theURL path] isEqualToString:path];
@@ -86,7 +87,7 @@ BOOL mfcGetStateOfLoginItemWithPath(NSString *path) {
 		}
 	}
 	CFRelease(loginItemsRef);
-	CFRelease((__bridge CFTypeRef)(loginItems));
+	CFRelease(loginItems);
 	return present;
 }
 
@@ -103,10 +104,11 @@ BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 	
 	UInt32 seedValue;
 	LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-	NSArray *loginItems = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, &seedValue);
-	for(id loginItem in loginItems) {
+	CFArrayRef loginItems = LSSharedFileListCopySnapshot(loginItemsRef, &seedValue);
+	CFIndex arrayCount = CFArrayGetCount(loginItems);
+	for(CFIndex i = 0; i < arrayCount; ++i) {
         CFURLRef urlRef;
-		LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)loginItem;
+		LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(loginItems, i);
 		LSSharedFileListItemResolve(itemRef, 0, &urlRef, NULL);
 		NSURL *theURL = (__bridge NSURL*) urlRef;
 		NSString* checkPath = [[theURL path] lastPathComponent];
@@ -121,7 +123,7 @@ BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 									  (__bridge CFURLRef)[NSURL fileURLWithPath: agentPath], NULL, NULL);
 	}
 	CFRelease(loginItemsRef);
-	CFRelease((__bridge CFTypeRef)(loginItems));
+	CFRelease(loginItems);
 	return YES;
 }
 
