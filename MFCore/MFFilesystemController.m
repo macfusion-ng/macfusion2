@@ -49,7 +49,8 @@ static MFFilesystemController* sharedController = nil;
 #pragma mark Init and Singleton methods
 + (MFFilesystemController *)sharedController {
 	if (sharedController == nil) {
-		sharedController = [[self alloc] init];
+		sharedController = [self alloc];
+		[sharedController init];
 	}
 	
 	return sharedController;
