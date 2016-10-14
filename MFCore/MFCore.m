@@ -78,7 +78,10 @@ BOOL mfcGetStateOfLoginItemWithPath(NSString *path) {
 	for(CFIndex i = 0; i < arrayCount; ++i) {
         CFURLRef urlRef;
 		LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(loginItems, i);
-		LSSharedFileListItemResolve(itemRef, 0, &urlRef, NULL);
+		OSStatus status = LSSharedFileListItemResolve(itemRef, 0, &urlRef, NULL);
+		if (status != noErr) {
+			continue;
+		}
 		NSURL *theURL = (__bridge NSURL*) urlRef;
         present = [[theURL path] isEqualToString:path];
         CFRelease(urlRef);
@@ -109,7 +112,10 @@ BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 	for(CFIndex i = 0; i < arrayCount; ++i) {
         CFURLRef urlRef;
 		LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(loginItems, i);
-		LSSharedFileListItemResolve(itemRef, 0, &urlRef, NULL);
+		OSStatus status = LSSharedFileListItemResolve(itemRef, 0, &urlRef, NULL);
+		if (status != noErr) {
+			continue;
+		}
 		NSURL *theURL = (__bridge NSURL*) urlRef;
 		NSString* checkPath = [[theURL path] lastPathComponent];
         CFRelease(urlRef);
