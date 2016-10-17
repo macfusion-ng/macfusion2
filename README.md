@@ -26,7 +26,7 @@ Remember that depending on the operating system you are using you will have to i
 Roadmap
 =======
 
-- Update the icons and resources for a retina display resolution, if you are a designer and you can help, please contact me [@yosmark][].
+- Update the icons and resources for a retina display resolution, if you are a designer and you can help, please contact me [@yoshikivb][].
 - Fix as many bugs as possible.
 - Release a stable 2.1 version in the near future.
 
@@ -47,4 +47,4 @@ Current fixes
 [Fuse for OSX]:http://osxfuse.github.com
 [XQuartz]:http://xquartz.macosforge.org
 [build of the development version]:https://github.com/ElDeveloper/macfusion2/releases/tag/2.1-dev
-[@yosmark]:https://twitter.com/yosmark
+[@yoshikivb]:https://twitter.com/yoshikivb
