@@ -15,7 +15,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.0.5-dev</string>
+	<string>2.8</string>
 	<key>MFFSDelegateClassName</key>
 	<string>SSHFSDelegate</string>
 	<key>MFPluginLongName</key>
