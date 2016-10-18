@@ -39,7 +39,7 @@ void mfcLaunchMenuling();
 void mfcKaboomMacfusion();
 
 // FUSE versioning
-NSString* mfcGetMacFuseVersion();
+NSString* mfcGetFuseVersion();
 
 // Trashing
 void mfcSetupTrashMonitoring();
