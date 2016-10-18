@@ -37,6 +37,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0682C04B1DB6D80D008BFF9D /* curlftpfs-static in Resources */ = {isa = PBXBuildFile; fileRef = 0682C0471DB6D652008BFF9D /* curlftpfs-static */; };
+		0682C04C1DB6D811008BFF9D /* curlftpfs-static-legacy in Resources */ = {isa = PBXBuildFile; fileRef = 0682C0481DB6D652008BFF9D /* curlftpfs-static-legacy */; };
+		0682C04D1DB6D81D008BFF9D /* sshfs-static-legacy in Resources */ = {isa = PBXBuildFile; fileRef = 0682C0451DB6D637008BFF9D /* sshfs-static-legacy */; };
 		502970E9165625B5007676B8 /* IconFamily.h in Headers */ = {isa = PBXBuildFile; fileRef = 502970E7165625B5007676B8 /* IconFamily.h */; };
 		502970EA165625B5007676B8 /* IconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = 502970E8165625B5007676B8 /* IconFamily.m */; };
 		502970EE165625C9007676B8 /* NSString+CarbonFSRefCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 502970EC165625C9007676B8 /* NSString+CarbonFSRefCreation.h */; };
@@ -175,7 +178,6 @@
 		D4E6D82F0D9373E40022763F /* ftpfs.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E6D82E0D9373E40022763F /* ftpfs.png */; };
 		D4E6D8340D93744D0022763F /* FTPFSDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E6D8330D93744D0022763F /* FTPFSDelegate.m */; };
 		D4E6D8370D93746E0022763F /* ftpfs.mfplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = D4E6D8090D9372640022763F /* ftpfs.mfplugin */; };
-		D4E6D8430D9375930022763F /* curlftpfs_static_mg in Resources */ = {isa = PBXBuildFile; fileRef = D4E6D8420D9375930022763F /* curlftpfs_static_mg */; };
 		D4E6D8480D937DB00022763F /* ftpfsConfiguration.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4E6D8470D937DB00022763F /* ftpfsConfiguration.xib */; };
 		D4E6DB050D93928F0022763F /* ftpfs_askpass in Resources */ = {isa = PBXBuildFile; fileRef = D4E6DB010D9392840022763F /* ftpfs_askpass */; };
 		D4E6DB120D9392AE0022763F /* ftpfs_askpass.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E6DAF80D9392450022763F /* ftpfs_askpass.m */; };
@@ -362,6 +364,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0682C0451DB6D637008BFF9D /* sshfs-static-legacy */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "sshfs-static-legacy"; sourceTree = "<group>"; };
+		0682C0471DB6D652008BFF9D /* curlftpfs-static */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "curlftpfs-static"; sourceTree = "<group>"; };
+		0682C0481DB6D652008BFF9D /* curlftpfs-static-legacy */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "curlftpfs-static-legacy"; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		502970E7165625B5007676B8 /* IconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconFamily.h; path = MFCore/IconFamily.h; sourceTree = "<group>"; };
 		502970E8165625B5007676B8 /* IconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IconFamily.m; path = MFCore/IconFamily.m; sourceTree = "<group>"; };
@@ -506,7 +511,6 @@
 		D4E6D82E0D9373E40022763F /* ftpfs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ftpfs.png; sourceTree = "<group>"; };
 		D4E6D8320D93744D0022763F /* FTPFSDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPFSDelegate.h; sourceTree = "<group>"; };
 		D4E6D8330D93744D0022763F /* FTPFSDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPFSDelegate.m; sourceTree = "<group>"; };
-		D4E6D8420D9375930022763F /* curlftpfs_static_mg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = curlftpfs_static_mg; sourceTree = "<group>"; };
 		D4E6D8470D937DB00022763F /* ftpfsConfiguration.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ftpfsConfiguration.xib; sourceTree = "<group>"; };
 		D4E6DAF80D9392450022763F /* ftpfs_askpass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ftpfs_askpass.m; sourceTree = "<group>"; };
 		D4E6DB010D9392840022763F /* ftpfs_askpass */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ftpfs_askpass; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -860,6 +864,7 @@
 				D439D6D50D0A0FDE0025574A /* sshfsConfiguration.xib */,
 				D4B14C0F0CE03F4C003195A3 /* sshfs-Info.plist */,
 				D4B14BAC0CE03C84003195A3 /* sshfs-static */,
+				0682C0451DB6D637008BFF9D /* sshfs-static-legacy */,
 				50F1E98D16179E2300F94F9D /* sshfs-static-lions */,
 				D41316310D7F740400F55B9B /* sshfsAdvanced.xib */,
 			);
@@ -1022,8 +1027,9 @@
 		D4E6D8170D9372C40022763F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0682C0471DB6D652008BFF9D /* curlftpfs-static */,
+				0682C0481DB6D652008BFF9D /* curlftpfs-static-legacy */,
 				D4E6D8470D937DB00022763F /* ftpfsConfiguration.xib */,
-				D4E6D8420D9375930022763F /* curlftpfs_static_mg */,
 				D4E6D82E0D9373E40022763F /* ftpfs.png */,
 				D4E6D80A0D9372640022763F /* ftpfs-Info.plist */,
 				D4E6D8270D9373130022763F /* ftpfs_icon.icns */,
@@ -1324,6 +1330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4B14BCB0CE03D25003195A3 /* sshfs-static in Resources */,
+				0682C04D1DB6D81D008BFF9D /* sshfs-static-legacy in Resources */,
 				D439D6D60D0A0FDE0025574A /* sshfsConfiguration.xib in Resources */,
 				D4656C8D0D6FD6DC00DE2208 /* sshfs_icon.icns in Resources */,
 				D4656C8E0D6FD6DC00DE2208 /* sshfs.png in Resources */,
@@ -1351,9 +1358,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E6DB050D93928F0022763F /* ftpfs_askpass in Resources */,
+				0682C04C1DB6D811008BFF9D /* curlftpfs-static-legacy in Resources */,
 				D4E6D8280D9373130022763F /* ftpfs_icon.icns in Resources */,
 				D4E6D82F0D9373E40022763F /* ftpfs.png in Resources */,
-				D4E6D8430D9375930022763F /* curlftpfs_static_mg in Resources */,
+				0682C04B1DB6D80D008BFF9D /* curlftpfs-static in Resources */,
 				D4E6D8480D937DB00022763F /* ftpfsConfiguration.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
