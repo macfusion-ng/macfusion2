@@ -44,7 +44,21 @@ static NSString *advancedViewControllerKey = @"sshfsAdvancedView";
 }
 
 - (NSString *)executablePath {
-	return [[NSBundle bundleForClass:[self class]] pathForResource:@"sshfs-static" ofType:nil inDirectory:nil];
+	NSProcessInfo *pinfo = [NSProcessInfo processInfo];
+	NSArray *tmpArr = [[pinfo operatingSystemVersionString] componentsSeparatedByString:@" "];
+	NSArray *versionArr = [[tmpArr objectAtIndex:1] componentsSeparatedByString:@"."];
+	NSInteger OSmajor = [[versionArr objectAtIndex:0] integerValue];
+	NSInteger OSminor = [[versionArr objectAtIndex:1] integerValue];
+
+	// This shouldn't be necessary, but helps to safeguard, if people were to compile for OS X < 10.9
+	// This check can hopefully removed in the future
+	if (OSmajor == 10 && OSminor >= 9) {
+		// Yes, use the latest and greatest code (no MacFuse compat layer needed)
+		return [[NSBundle bundleForClass:[self class]] pathForResource:@"sshfs-static" ofType:nil inDirectory:nil];
+	} else {
+		// Fallback to the legacy code that requires the MacFuse compat layer
+		return [[NSBundle bundleForClass:[self class]] pathForResource:@"sshfs-static-legacy" ofType:nil inDirectory:nil];
+	}
 }
 
 - (NSArray *)secretsClientsList {
