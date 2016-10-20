@@ -1,3 +1,29 @@
-*.mode1v3
+# Exclude the build directory
+build/
+DerivedData/
+
+# Exclude temp nibs and swap files
+*~.nib
+*~.xib
+*.swp
+
+# Exclude OS X folder attributes
+.DS_Store
+
+# Xcode
 *.pbxuser
-*DS_Store*
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata/
+profile
+*.moved-aside
+
+# Other files
+InfoPlist.h
