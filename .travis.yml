@@ -1,0 +1,7 @@
+branches:
+  except:
+    - /^(\d)+(\.(\d)+)*[a-z]*$/
+
+language: objective-c
+script:
+  - xcodebuild -project "MacFusion2.xcodeproj" -target All -configuration "Release" $(XC_OPTIONS) build
