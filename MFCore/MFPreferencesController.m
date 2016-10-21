@@ -22,6 +22,7 @@
 
 #define kMFPrefsPluginToolbarIdentifier @"Plugin"
 #define kMFPrefsGeneralToolbarIdentifier @"General"
+#define kMFPrefsInfoToolbarIdentifier @"Info"
 
 @implementation MFPreferencesController
 - (id)initWithWindowNibName:(NSString *)name {
@@ -34,7 +35,7 @@
 }
 
 - (NSArray *)prefsViews {
-	return [NSArray arrayWithObjects: pluginPrefsView, generalPrefsView, nil];
+	return [NSArray arrayWithObjects: pluginPrefsView, generalPrefsView, infoPrefsView, nil];
 }
 
 - (void)awakeFromNib {
@@ -81,6 +82,10 @@
 		item = [[NSToolbarItem alloc] initWithItemIdentifier: kMFPrefsGeneralToolbarIdentifier];
 		[item setLabel:@"General"];
 		[item setImage:[NSImage imageNamed: @"NSPreferencesGeneral"]];
+	} else if ([itemIdentifier  isEqual: kMFPrefsInfoToolbarIdentifier]) {
+		item = [[NSToolbarItem alloc] initWithItemIdentifier: kMFPrefsInfoToolbarIdentifier];
+		[item setLabel:@"Info"];
+		[item setImage:[NSImage imageNamed: @"NSInfo"]];
 	}
 	
 	[item setTarget:self];
@@ -89,7 +94,7 @@
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar {
-	return [NSArray arrayWithObjects:kMFPrefsGeneralToolbarIdentifier, kMFPrefsPluginToolbarIdentifier, nil];
+	return [NSArray arrayWithObjects:kMFPrefsGeneralToolbarIdentifier, kMFPrefsPluginToolbarIdentifier, kMFPrefsInfoToolbarIdentifier, nil];
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
@@ -106,7 +111,9 @@
 		newView = pluginPrefsView;
 	} else if ([[sender itemIdentifier]  isEqual: kMFPrefsGeneralToolbarIdentifier]) {
 		newView = generalPrefsView;
-	} else {
+	} else if ([[sender itemIdentifier]  isEqual: kMFPrefsInfoToolbarIdentifier]) {
+		newView = infoPrefsView;
+	}else {
 		return;
 	}
 	

@@ -23,6 +23,7 @@
 	IBOutlet NSTextField *fuseVersionTextField;
 	IBOutlet NSView *pluginPrefsView;
 	IBOutlet NSView *generalPrefsView;
+	IBOutlet NSView *infoPrefsView;
 	
 	MFClient *_client;
 	MFPreferences *_sharedPreferences;
