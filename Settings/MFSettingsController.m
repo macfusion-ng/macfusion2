@@ -135,8 +135,11 @@
 	
 	[[MFPreferences sharedPreferences] addObserver:self forKeyPath:kMFPrefsAutosize options:0 context:(__bridge void *)(self)];
 	[filesystemTableView setIntercellSpacing: NSMakeSize(10, 0)];
+	NSDictionary* infoDict = [NSBundle bundleForClass:[self class]].infoDictionary;
+	titleMainView = [[NSString alloc] initWithFormat:@"Macfusion %@", infoDict[@"CFBundleShortVersionString"]];
 	
 	NSWindow *window = [filesystemTableView window];
+	[window setTitle:titleMainView];
 	[window center];
 	
 	[filesystemTableView bind:@"filesystems" toObject:filesystemArrayController  withKeyPath:@"arrangedObjects" options:nil];
