@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		06D9D6551DBABC4E00A3E9CE /* Generate Version Info */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 06D9D6561DBABC4E00A3E9CE /* Build configuration list for PBXAggregateTarget "Generate Version Info" */;
+			buildPhases = (
+				06D9D65B1DBABC5600A3E9CE /* Run Generate Version Info Script */,
+			);
+			dependencies = (
+			);
+			name = "Generate Version Info";
+			productName = "Generate Version Info";
+		};
 		D41E1E0B0D8758A200F46F50 /* Plugins */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = D41E1E160D8758E400F46F50 /* Build configuration list for PBXAggregateTarget "Plugins" */;
@@ -25,6 +36,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				06D9D6641DBABDCB00A3E9CE /* PBXTargetDependency */,
 				D4071EBE0D8B444A000A1D66 /* PBXTargetDependency */,
 				D48DB9890D70D7BB008A62BB /* PBXTargetDependency */,
 				D439D6490D0A06DD0025574A /* PBXTargetDependency */,
@@ -195,6 +207,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		06D9D6631DBABDCB00A3E9CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 06D9D6551DBABC4E00A3E9CE;
+			remoteInfo = "Generate Version Info";
+		};
 		D4071EBD0D8B444A000A1D66 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
@@ -1264,6 +1283,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0730;
+				TargetAttributes = {
+					06D9D6551DBABC4E00A3E9CE = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "MacFusion2" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1290,6 +1315,7 @@
 				D4DB42030D3E863100C99914 /* MacfusionMain */,
 				D4FC0DA30CF23CFE0029B133 /* All */,
 				D41E1E0B0D8758A200F46F50 /* Plugins */,
+				06D9D6551DBABC4E00A3E9CE /* Generate Version Info */,
 			);
 		};
 /* End PBXProject section */
@@ -1376,6 +1402,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		06D9D65B1DBABC5600A3E9CE /* Run Generate Version Info Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Generate Version Info Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "INFOPLIST=\"Resources/InfoPlist.h\"\nVERSION_MAY_CONTAIN_CHARS=1\nSEP=\"_\"\n\nif [ -e /opt/local/bin/git ]\nthen\nGIT=/opt/local/bin/git\nelse\nGIT=`which git`\nfi\n\n# CFBundleShortVersionString    x.y[.z]\n# CFBundleVersion               x.y.z-githash\n\n#Effectively, LS expects the following format: nnnnn[.nn[.nn]][X] where n is a digit 0-9,\n#square brackets indicate optional components, and X is any string not starting with a digit.\n#X is ignored when present.\n\ngithash=`$GIT log -1 --pretty=oneline --abbrev-commit |cut -c1-7`\nrevision=`$GIT log --oneline | wc -l |tr -d [[:space:]]`\n\n# if no tag, set x.y to 0.0\nif [ `$GIT describe --long 2>&1 |cut -c1-5` == \"fatal\" ]\nthen\nversion=0.0\ninternal_version=0.0.0${SEP}$githash\nelse\n# get tag and long tag name (w/o the githash)\nTAG=`$GIT describe --tags`\nTAGLONG=`$GIT describe --tags --long |sed \"s/-g${githash}//\"`\n\n# remove leading characters\nTAG=`echo $TAG |sed 's/[a-zA-Z]*//'`\nTAGLONG=`echo $TAGLONG |sed 's/[a-zA-Z]*//'`\n\n# get the number of commits since last tag\nTMP1=`expr \"$TAGLONG\" : '.*\\(-[0-9]*\\)'`\n\nif [ \"$TMP1\" == \"0\" ]\nthen\ncommits=0\nelse\ncommits=`echo $TMP1 |cut -c2-`\nfi\n\nif [ \"$VERSION_MAY_CONTAIN_CHARS\" == \"1\" ]\nthen\n# clean tag: remove number of commits and hash (if present), replace consecutive . with one ., remove trailing .\nTAG=`echo $TAG | sed 's/\\([0-9\\.]*\\)-[0-9]*-g[0-9a-f]\\{7\\}/\\1/' | sed 's/[\\.]\\{2,\\}/\\./g' | sed 's/\\.*$//'`\nelse\n# clean tag: remove anything after the version, replace consecutive . with one ., remove trailing .\nTAG=`echo $TAG | sed 's/\\([0-9\\.]*\\).*/\\1/' | sed 's/[\\.]\\{2,\\}/\\./g' | sed 's/\\.*$//'`\nfi\n# create version and internal_version\nversion=$TAG\n\nif [ \"$commits\" != \"0\" ] # if no commits since tagged, omit the zero in version\nthen\nversion=${TAG}.${commits}\nfi\n\ninternal_version=${TAG}.${commits}${SEP}${githash}\nfi\n\nif [ \"$1\" == \"-d\" ]\nthen\necho \"VERSION_INFO         : $version\"\necho \"INTERNAL_VERSION_INFO: $internal_version\"\necho \"GIT_HASH_INFO        : $githash\"\necho \"REVISION_INFO        : $revision\"\nexit\nfi\n\necho \"#define VERSION_INFO $version\" > $INFOPLIST\necho \"#define INTERNAL_VERSION_INFO $internal_version\" >> $INFOPLIST\necho \"#define GIT_HASH_INFO $githash\" >> $INFOPLIST\necho \"#define REVISION_INFO $revision\" >> $INFOPLIST\necho \"\" >> $INFOPLIST\necho \"#define VERSION \\\"$version\\\"\" >> $INFOPLIST\necho \"#define INTERNAL_VERSION \\\"$internal_version\\\"\" >> $INFOPLIST\necho \"#define GIT_HASH \\\"$githash\\\"\" >> $INFOPLIST\necho \"#define REVISION \\\"$revision\\\"\" >> $INFOPLIST\n";
+		};
 		D41E209E0D886B6600F46F50 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1525,6 +1565,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		06D9D6641DBABDCB00A3E9CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 06D9D6551DBABC4E00A3E9CE /* Generate Version Info */;
+			targetProxy = 06D9D6631DBABDCB00A3E9CE /* PBXContainerItemProxy */;
+		};
 		D4071EBE0D8B444A000A1D66 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D4EA614F0D8B30DA006D8885 /* macfusionAgent */;
@@ -1618,6 +1663,34 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		06D9D6571DBABC4E00A3E9CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		06D9D6581DBABC4E00A3E9CE /* Release-Signed */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Release-Signed";
+		};
+		06D9D6591DBABC4E00A3E9CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		06D9D65A1DBABC4E00A3E9CE /* Debug-Signed */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Debug-Signed";
+		};
 		1DEB927A08733DD40010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2685,6 +2758,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		06D9D6561DBABC4E00A3E9CE /* Build configuration list for PBXAggregateTarget "Generate Version Info" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06D9D6571DBABC4E00A3E9CE /* Release */,
+				06D9D6581DBABC4E00A3E9CE /* Release-Signed */,
+				06D9D6591DBABC4E00A3E9CE /* Debug */,
+				06D9D65A1DBABC4E00A3E9CE /* Debug-Signed */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "MacFusion2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
