@@ -133,8 +133,8 @@ BOOL mfcSetStateForAgentLoginItem(BOOL state) {
 	return YES;
 }
 
-NSString *mfcGetMacFuseVersion() {
-	NSDictionary *fuseData = [NSDictionary dictionaryWithContentsOfFile:@"/Library/Filesystems/fusefs.fs/Contents/Info.plist"];
+NSString *mfcGetFuseVersion() {
+	NSDictionary *fuseData = [NSDictionary dictionaryWithContentsOfFile:@"/Library/Filesystems/osxfuse.fs/Contents/Info.plist"];
 	return [fuseData objectForKey: @"CFBundleVersion"];
 }
 

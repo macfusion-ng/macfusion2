@@ -40,8 +40,8 @@
 - (void)awakeFromNib {
 	[agentLoginItemButton setState:mfcGetStateForAgentLoginItem()];
 	[menuLoginItemButton setState:[_sharedPreferences getBoolForPreference: kMFPrefsAutoloadMenuling]];
-	NSString *macfuseVersion = mfcGetMacFuseVersion();
-	NSString *versionString = macfuseVersion ? [NSString stringWithFormat: @"MacFuse Version %@ Found", macfuseVersion] : @"MacFuse not Found!";
+	NSString *fuseVersion = mfcGetFuseVersion();
+	NSString *versionString = fuseVersion ? [NSString stringWithFormat: @"FUSE Version %@ Found", fuseVersion] : @"FUSE not Found!";
 	[fuseVersionTextField setStringValue: versionString];
 	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier: @"Preferences"];
 	[toolbar setDelegate:self];
