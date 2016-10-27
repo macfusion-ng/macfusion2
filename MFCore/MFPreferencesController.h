@@ -24,6 +24,11 @@
 	IBOutlet NSView *pluginPrefsView;
 	IBOutlet NSView *generalPrefsView;
 	IBOutlet NSView *infoPrefsView;
+
+	IBOutlet NSTextField *macfusionVersionInfo;
+	IBOutlet NSTextField *buildVersionInfo;
+	IBOutlet NSTextField *githashVersionInfo;
+	IBOutlet NSTextField *fuseVersionInfo;
 	
 	MFClient *_client;
 	MFPreferences *_sharedPreferences;
@@ -31,6 +36,7 @@
 	NSView *_emptyView;
 }
 
+- (IBAction)openWebsite:(id)sender;
 - (IBAction)loginItemCheckboxChanged:(id)sender;
 - (IBAction)toolbarItemChanged:(id)sender;
 

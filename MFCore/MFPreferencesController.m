@@ -39,11 +39,19 @@
 }
 
 - (void)awakeFromNib {
+	NSDictionary* infoDict = [[NSBundle bundleForClass:[self class]] infoDictionary];
+
 	[agentLoginItemButton setState:mfcGetStateForAgentLoginItem()];
 	[menuLoginItemButton setState:[_sharedPreferences getBoolForPreference: kMFPrefsAutoloadMenuling]];
 	NSString *fuseVersion = mfcGetFuseVersion();
 	NSString *versionString = fuseVersion ? [NSString stringWithFormat: @"FUSE Version %@ Found", fuseVersion] : @"FUSE not Found!";
 	[fuseVersionTextField setStringValue: versionString];
+
+	[macfusionVersionInfo setStringValue: infoDict[@"CFBundleShortVersionString"]];
+	[buildVersionInfo setStringValue: infoDict[@"CFBundleVersion"]];
+	[githashVersionInfo setStringValue: infoDict[@"GitHash"]];
+	[fuseVersionInfo setStringValue: fuseVersion];
+
 	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier: @"Preferences"];
 	[toolbar setDelegate:self];
 	[toolbar setAllowsUserCustomization:NO];
@@ -57,6 +65,12 @@
 	}
 	
 	[self toolbarItemChanged:[[toolbar items] objectAtIndex:0]];
+}
+
+
+- (IBAction)openWebsite:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"https://macfusion-ng.github.io"]];
 }
 
 - (IBAction)loginItemCheckboxChanged:(id)sender {
