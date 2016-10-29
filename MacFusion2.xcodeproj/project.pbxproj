@@ -1658,7 +1658,6 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -1670,7 +1669,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = new_sshfs_askpass;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1681,7 +1679,6 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -1704,7 +1701,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = Plugins;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1729,7 +1725,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MFCore-Info.plist";
@@ -1746,7 +1741,6 @@
 				PRODUCT_NAME = MFCore;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1788,7 +1782,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MFCore-Info.plist";
@@ -1805,7 +1798,6 @@
 				PRODUCT_NAME = MFCore;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -1815,7 +1807,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -1827,7 +1818,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = ftpfs_askpass;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -1838,7 +1828,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "FTPFS/ftpfs-Info.plist";
@@ -1853,7 +1842,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.ftpfs;
 				PRODUCT_NAME = ftpfs;
 				WRAPPER_EXTENSION = mfplugin;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -1864,7 +1852,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "SSHFS/sshfs-Info.plist";
@@ -1879,7 +1866,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.sshfs;
 				PRODUCT_NAME = sshfs;
 				WRAPPER_EXTENSION = mfplugin;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -1890,7 +1876,6 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -1902,7 +1887,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = new_sshfs_askpass;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -1914,7 +1898,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/macfusionAgent-Info.plist";
@@ -1928,7 +1911,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.macfusionAgent;
 				PRODUCT_NAME = macfusionAgent;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -1938,7 +1920,6 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -1960,7 +1941,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MacfusionMenuling-Info.plist";
@@ -1975,7 +1955,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.menuling;
 				PRODUCT_NAME = MacfusionMenuling;
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -1990,7 +1969,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MacfusionMain-Info.plist";
@@ -2007,7 +1985,6 @@
 				SDKROOT = macosx;
 				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -2018,7 +1995,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = All;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -2029,7 +2005,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = Plugins;
-				ZERO_LINK = NO;
 			};
 			name = "Release-Signed";
 		};
@@ -2072,7 +2047,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MFCore-Info.plist";
@@ -2089,7 +2063,6 @@
 				PRODUCT_NAME = MFCore;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2099,7 +2072,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -2111,7 +2083,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = ftpfs_askpass;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2122,7 +2093,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "FTPFS/ftpfs-Info.plist";
@@ -2137,7 +2107,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.ftpfs;
 				PRODUCT_NAME = ftpfs;
 				WRAPPER_EXTENSION = mfplugin;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2148,7 +2117,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "SSHFS/sshfs-Info.plist";
@@ -2163,7 +2131,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.sshfs;
 				PRODUCT_NAME = sshfs;
 				WRAPPER_EXTENSION = mfplugin;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2174,7 +2141,6 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -2186,7 +2152,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = new_sshfs_askpass;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2198,7 +2163,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/macfusionAgent-Info.plist";
@@ -2212,7 +2176,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.macfusionAgent;
 				PRODUCT_NAME = macfusionAgent;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2222,7 +2185,6 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -2244,7 +2206,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MacfusionMenuling-Info.plist";
@@ -2259,7 +2220,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.menuling;
 				PRODUCT_NAME = MacfusionMenuling;
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2274,7 +2234,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MacfusionMain-Info.plist";
@@ -2291,7 +2250,6 @@
 				SDKROOT = macosx;
 				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2302,7 +2260,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = All;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2313,7 +2270,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = Plugins;
-				ZERO_LINK = NO;
 			};
 			name = "Debug-Signed";
 		};
@@ -2324,7 +2280,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MacfusionMenuling-Info.plist";
@@ -2339,7 +2294,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.menuling;
 				PRODUCT_NAME = MacfusionMenuling;
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2350,7 +2304,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -2366,7 +2319,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.menuling;
 				PRODUCT_NAME = MacfusionMenuling;
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -2377,7 +2329,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "SSHFS/sshfs-Info.plist";
@@ -2392,7 +2343,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.sshfs;
 				PRODUCT_NAME = sshfs;
 				WRAPPER_EXTENSION = mfplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2402,7 +2352,6 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -2428,7 +2377,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MacfusionMain-Info.plist";
@@ -2445,7 +2393,6 @@
 				SDKROOT = macosx;
 				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2460,7 +2407,6 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -2478,7 +2424,6 @@
 				SDKROOT = macosx;
 				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -2489,7 +2434,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "FTPFS/ftpfs-Info.plist";
@@ -2504,7 +2448,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.ftpfs;
 				PRODUCT_NAME = ftpfs;
 				WRAPPER_EXTENSION = mfplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2515,7 +2458,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -2540,7 +2482,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -2552,7 +2493,6 @@
 					AppKit,
 				);
 				PRODUCT_NAME = ftpfs_askpass;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2562,7 +2502,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -2586,7 +2525,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/macfusionAgent-Info.plist";
@@ -2600,7 +2538,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.macfusionAgent;
 				PRODUCT_NAME = macfusionAgent;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2612,7 +2549,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -2637,7 +2573,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = All;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2680,7 +2615,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Resources/MFCore-Info.plist";
@@ -2697,7 +2631,6 @@
 				PRODUCT_NAME = MFCore;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -2708,7 +2641,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "SSHFS/sshfs-Info.plist";
@@ -2723,7 +2655,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.mgorbach.macfusion2.sshfs;
 				PRODUCT_NAME = sshfs;
 				WRAPPER_EXTENSION = mfplugin;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -2733,7 +2664,6 @@
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
@@ -2755,7 +2685,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = All;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
