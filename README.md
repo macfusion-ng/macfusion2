@@ -40,8 +40,6 @@ Current fixes
 - Added a checkbox to add (or not) a mounted filesystem into Finder's sidebar.
 - Added the output of `git rev-parse --short HEAD` to the about window.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ElDeveloper/macfusion2/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 [Macfusion]:http://macfusionapp.org/
 [MacFUSE]:http://code.google.com/p/macfuse/
 [Fuse for OSX]:http://osxfuse.github.com
