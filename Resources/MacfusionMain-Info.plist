@@ -36,15 +36,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.5-dev</string>
+	<string>VERSION_INFO</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.0.5-dev</string>
-	<key>GitSHA</key>
-	<string></string>
-	<key>GitStatus</key>
-	<string></string>
+	<string>REVISION_INFO</string>
+	<key>GitHash</key>
+	<string>GIT_HASH_INFO</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.6.0</string>
 	<key>NSMainNibFile</key>
@@ -54,7 +52,7 @@
 	<key>SUCheckForUpdates</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>http://macfusionapp.org/appcast.xml</string>
+	<string>https://macfusionapp.org/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>macfusion_dsa_pub.pem</string>
 </dict>
