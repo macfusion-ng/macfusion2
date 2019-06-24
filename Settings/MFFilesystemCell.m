@@ -89,12 +89,12 @@
 	[style setLineBreakMode: NSLineBreakByTruncatingTail];
 	
 	NSMutableDictionary* mainTextAttributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
-											   [NSColor blackColor], NSForegroundColorAttributeName,
+											   [NSColor controlTextColor], NSForegroundColorAttributeName,
 											   [NSFont systemFontOfSize:14], NSFontAttributeName,
 											   style, NSParagraphStyleAttributeName,
 											   nil];
 	NSMutableDictionary* secondaryTextAttributes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-													[NSColor grayColor], NSForegroundColorAttributeName,
+													[NSColor controlTextColor], NSForegroundColorAttributeName,
 													[NSFont systemFontOfSize:12], NSFontAttributeName,
 													style, NSParagraphStyleAttributeName,
 													nil];
@@ -129,16 +129,23 @@
 
 	if ([self isHighlighted] && current)
 	{
-		[mainTextAttributes setValue: [NSColor whiteColor]
-							  forKey: NSForegroundColorAttributeName];
-		[secondaryTextAttributes setValue: [NSColor whiteColor]
-								   forKey: NSForegroundColorAttributeName];
+		if (@available(macOS 10.12, *)) {
+			[mainTextAttributes setValue: [NSColor alternateSelectedControlTextColor]
+								  forKey: NSForegroundColorAttributeName];
+			[secondaryTextAttributes setValue: [NSColor alternateSelectedControlTextColor]
+									   forKey: NSForegroundColorAttributeName];
+		} else {
+			[mainTextAttributes setValue: [NSColor selectedTextColor]
+								  forKey: NSForegroundColorAttributeName];
+			[secondaryTextAttributes setValue: [NSColor selectedTextColor]
+									   forKey: NSForegroundColorAttributeName];
+		}
 	}
 	if ([self isHighlighted] && !current)
 	{
-		[mainTextAttributes setValue: [NSColor whiteColor]
+		[mainTextAttributes setValue: [NSColor controlTextColor]
 							  forKey: NSForegroundColorAttributeName];
-		[secondaryTextAttributes setValue: [NSColor whiteColor]
+		[secondaryTextAttributes setValue: [NSColor controlTextColor]
 								   forKey: NSForegroundColorAttributeName];
 	}
 
