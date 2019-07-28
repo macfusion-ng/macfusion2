@@ -15,9 +15,9 @@
 // limitations under the License.
 
 #import <Cocoa/Cocoa.h>
+#import <QuartzCore/QuartzCore.h>
 
-
-@interface MGFadingWindow : NSPanel {
+@interface MGFadingWindow : NSPanel <CAAnimationDelegate> {
 	BOOL closing;
 }
 
