@@ -21,7 +21,7 @@
 MFLogViewerController, MGActionButton;
 
 
-@interface MFSettingsController : NSObject <MFClientFSDelegateProtocol> 
+@interface MFSettingsController : NSObject <MFClientFSDelegateProtocol, NSApplicationDelegate>
 {
 	IBOutlet NSArrayController* filesystemArrayController;
 	IBOutlet NSArrayController* pluginArrayController;
@@ -36,7 +36,6 @@ MFLogViewerController, MGActionButton;
 }
 
 - (IBAction)newFSPopupClicked:(id)sender;
-- (IBAction)showAboutWindow:(id)sender;
 - (IBAction)showPreferences:(id)sender;
 - (IBAction)startMenuItem:(id)sender;
 - (IBAction)showLogViewer:(id)sender;

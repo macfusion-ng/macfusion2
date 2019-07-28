@@ -26,6 +26,7 @@
 - (NSRect)progressIndicatorRectInRect:(NSRect)rect;
 - (void)clearImageForFS:(MFClientFS*)fs;
 - (NSImage*)iconToDraw;
+- (NSRect)rectForIconBox;
 
 @property(readwrite) BOOL editPushed;
 @property(readwrite) BOOL mountPushed;

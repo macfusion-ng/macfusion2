@@ -343,7 +343,7 @@
 
 - (IBAction)revealConfigForSelectedFS:(id)sender {
 	for(MFClientFS *fs in [self selectedFilesystems]) {
-		[[NSWorkspace sharedWorkspace] selectFile:fs.filePath inFileViewerRootedAtPath:nil];
+		[[NSWorkspace sharedWorkspace] selectFile:fs.filePath inFileViewerRootedAtPath:@""];
 	}
 }
 

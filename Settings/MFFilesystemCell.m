@@ -45,8 +45,6 @@
 - (NSRect)insetRectWithFrame:(NSRect)frame
 {
 	return frame;
-	NSRect insetRect = NSInsetRect(frame, 10, 0);
-	return insetRect;
 }
 - (NSRect)iconBoxWithFrame:(NSRect)frame
 {
@@ -77,6 +75,10 @@
 - (void)clearImageForFS:(MFClientFS*)fs
 {
 	[icons removeObjectForKey: fs];
+}
+
+- (NSRect)rectForIconBox{
+	return NSMakeRect(0, 0, IMAGE_SIZE, IMAGE_SIZE);
 }
 
 # pragma mark Drawing

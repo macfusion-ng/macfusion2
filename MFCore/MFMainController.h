@@ -16,7 +16,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MFMainController : NSObject <NSFileManagerDelegate> {	
+@interface MFMainController : NSObject <NSFileManagerDelegate, NSApplicationDelegate> {
 }
 
 + (MFMainController *)sharedController;

@@ -228,7 +228,7 @@ forDraggedRowsWithIndexes:(NSIndexSet*)indexes
 	NSInteger fsRowIndex = [theRowIndexes firstIndex];
 	MFFilesystemCell* cell = (MFFilesystemCell*)[self preparedCellAtColumn:0 row: fsRowIndex];
 	NSImage* icon = [cell iconToDraw];
-	[icon setFlipped: NO];
+	[icon drawInRect:[cell rectForIconBox] fromRect:NSZeroRect operation:NSCompositeSourceIn fraction:1.0 respectFlipped:YES hints:nil];
 	return icon;
 }
 
