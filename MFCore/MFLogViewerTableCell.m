@@ -83,7 +83,7 @@
 	
 	NSMutableParagraphStyle *par = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[par setLineBreakMode:NSLineBreakByCharWrapping];
-	NSColor* color = current && [self isHighlighted] ? [NSColor whiteColor] : [NSColor blackColor];
+	NSColor* color = current && [self isHighlighted] ? [NSColor selectedTextColor] : [NSColor textColor];
 	return [NSDictionary dictionaryWithObjectsAndKeys:color, NSForegroundColorAttributeName,
 			[NSFont systemFontOfSize:11.0], NSFontAttributeName,[par copy], NSParagraphStyleAttributeName,
 			nil];
